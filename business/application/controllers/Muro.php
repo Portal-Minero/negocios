@@ -20,7 +20,12 @@ function __construct()
 			}
 			
 			
-						
+				public function index2() 
+			{
+				//echo "bien222sssss2";
+				//$this->load->view('welcome_message');
+				
+			}		
 			
 			function graba_sectores_selecionados(){
 				
