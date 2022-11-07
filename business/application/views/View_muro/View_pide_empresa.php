@@ -72,12 +72,9 @@ select:focus{ outline: none;}
  
 <script> 
 function buscar(opcion){
-	var _pag   =0;
-	var _texto = $("#texto").val();
-	var _faena = $('#faena').val();
-	var _categoria = $('#categoria').val();
-	var _procesos  = $('#procesos').val();
-	if(opcion==1){
+	
+	var _buscar = $("#buscar").val();
+	
 			if( _texto==""){
 				alert("debe ingresar texto a buscar"); 
 				return(false);
@@ -235,7 +232,7 @@ function buscar(opcion){
 
 <form id="detfa" name="detfa" method="post" action="<?=URL_PM_APP_NEG?>muro/trae_descripcion_faena/">
 
-	<input type="hidden" name="parame_1" id="parame_1"  value="0"/>
+	<input type="hidden" name="parame_1" id="parame_1"  value="<?=$pais;?>"/>
 	<input type="hidden" name="parame_2" id="parame_2"  value="0"/>
 	<input type="hidden" name="parame_3" id="parame_3"  value="0"/>
 	

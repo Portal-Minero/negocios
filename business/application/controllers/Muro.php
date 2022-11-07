@@ -443,7 +443,7 @@ function __construct()
 			
 			
 			function companias_mineras($pais=81){
-				if($pais==81){ $npais="CHILE";} else {$npais="PERU";}
+				if($pais==81){ $npais="CHILE";} else {$npais="PERU"}
 				
 				$datos['npais']                                  = $npais;
 				$datos['pais']                                   = $pais=81;
