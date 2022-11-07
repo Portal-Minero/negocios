@@ -443,7 +443,12 @@ function __construct()
 			
 			
 			function companias_mineras($pais=81){
+				if($pais==81){ $npais="CHILE";} else {$npais="PERU";}
 				
+				$datos['npais']                                  = $npais;
+				$datos['pais']                                   = $pais=81;
+				$datos['sectores']                               = $this->session->userdata('SES_sectores');
+				$this->load->view('View_muro/View_pide_empresa',$datos);
 			
 			}
 			
