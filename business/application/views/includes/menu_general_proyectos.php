@@ -90,7 +90,8 @@
 	  <hr>
 	  <h5><b>Compañias Mineras</b></h5>
       <ul>
-		  <li>Chile</li>
-		  <li>Perú</li>
+		  <li><a href="<?=URL_PM_APP_NEG;?>muro/companias_mineras">Chile</a></li>
+		  <li><a href="<?=URL_PM_APP_NEG;?>muro/companias_mineras">Perú</a></li>
+		  
 	 </ul>
 	</div>

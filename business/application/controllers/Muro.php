@@ -20,12 +20,7 @@ function __construct()
 			}
 			
 			
-				public function index2() 
-			{
-				//echo "bien222sssss2";
-				//$this->load->view('welcome_message');
-				
-			}		
+						
 			
 			function graba_sectores_selecionados(){
 				
@@ -444,6 +439,12 @@ function __construct()
 			    }else{ echo "<br><br><h4 align='center'>No se encontraron considencias, revise criterios de búsqueda.</h4>";}
 			  
 			  
+			}
+			
+			
+			function companias_mineras($pais=81){
+				
+			
 			}
 			
 			function trae_descripcion_faena22($ids=0){
