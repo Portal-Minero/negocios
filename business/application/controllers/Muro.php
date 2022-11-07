@@ -443,7 +443,7 @@ function __construct()
 			
 			
 			function companias_mineras($pais=81){
-				if($pais==81){ $npais="CHILE";} else {$npais="PERU"}
+				if($pais==81){ $npais="CHILE";} else {$npais="PERU";}
 				
 				$datos['npais']                                  = $npais;
 				$datos['pais']                                   = $pais=81;
@@ -457,6 +457,35 @@ function __construct()
 				$this->load->view('View_muro/View_equipos_detalle_faena',$datos);
 			}
 			
+			function listado_empresas_mineras(){
+								
+				 $this ->load->model ('Mod_empresa/Mod_empresa_minera','empresa_minera');
+				 $texto     = "";
+				 $tipo      = "";
+				 $pais      = "";
+				 $operador  = "";
+				 
+				if (!empty($_REQUEST['buscar'])) {
+					 $texto = $_REQUEST['buscar'];
+				 }
+				 if (!empty($_REQUEST['tipo'])) {
+					$tipo = $_REQUEST['tipo'];
+				 }
+				
+				 if (!empty($_REQUEST['pais'])) {
+					$pais = $_REQUEST['pais'];
+				 }
+				 
+				  if (!empty($_REQUEST['operador'])) {
+					$operador = $_REQUEST['operador'];
+				 }
+				 
+				$rs = $this-empresa_minera->buscar_empresas($texto, $tipo, $pais, $operador);
+				
+				print_r($rs);
+			}
+
+
 			
 			function trae_descripcion_faena($ids=0){
 				
