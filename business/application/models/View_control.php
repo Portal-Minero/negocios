@@ -158,6 +158,43 @@ class M_diremp extends CI_Model{
 		}
 	}*/
 	
+	
+	function guardar_suministros_final($id, $sumins){
+		if($id!="" && $id!=NULL){
+			if(is_array($sumins) && sizeof($sumins)>0){
+				foreach($sumins as $id_sum){
+					if($id_sum!=0){
+						$datos_sumin = array(
+							'id_sumin'=>$id_sum,
+							'id_emp_prov'=>$id);
+							
+						$this->db->where($datos_sumin);
+						$query=$this->db->get('emp_prov_x_suministros');	
+						if($query->num_rows()==0){
+							$this->db->insert("emp_prov_x_suministros", $datos_sumin);
+						}
+					}
+				}
+			}
+						
+			$total_relaciones=$this->total_rel_sumin($id);
+		
+			if($total_relaciones!=NULL){
+				foreach($total_relaciones as $id_sumin_ant){		  
+					if(!in_array($id_sumin_ant, $sumins)){
+						$datos_sumin = array(
+						'id_sumin'=>$id_sumin_ant,
+						'id_emp_prov'=>$id);
+						$this->db->where($datos_sumin);					
+						$this->db->delete("emp_prov_x_suministros");
+					}
+				}
+			}
+		}else{
+			return(false);
+		}
+	}
+	
 	function guardar_equipos($id, $equipos){
 		if($id!="" && $id!=NULL){
 			if(is_array($equipos) && sizeof($equipos)>0){

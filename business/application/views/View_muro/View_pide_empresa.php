@@ -71,32 +71,17 @@ select:focus{ outline: none;}
 <body>
  
 <script> 
-function buscar(opcion){
+function buscar(){
 	
 	var _buscar = $("#buscar").val();
+	var _tipo   = $("#tipo").val();
+	var _pais   = '<?=$npais;?>';
 	
-			if( _texto==""){
-				alert("debe ingresar texto a buscar"); 
-				return(false);
-			}
-			if( _categoria ==""){
-				alert("debe ingresar categoría que desea buscar"); 
-				return(false);
-			}
+	
+	if(_buscar==""){
+		alert("Debe ingresar texto a buscar");
+		return false;
 	}
-	
-	
-	if(opcion==2){
-		    $("#procesos").val('');
-			if(  _procesos==""){
-				 alert("debe seleccionar proceso a buscar"); 
-				 return(false);
-			}
-			
-	}
-	
-	
-	
 	
 	
 	 	 
@@ -104,7 +89,7 @@ function buscar(opcion){
 	    $.ajax
 							  ({
 							   url: ' <?=URL_PM_APP_NEG?>muro/listado_empresas_mineras/',
-							   data : {  texto :_texto, faena :  _faena,categoria : _categoria,pag : _pag , procesos :_procesos},
+							   data : {  buscar :_buscar, tipo : _tipo,pais : _pais},
 							   type : 'post',
 							   cache: false,
 							   
@@ -118,8 +103,29 @@ function buscar(opcion){
 }
 
 
-
-
+function ver(id){
+	
+	var _pais   = '<?=$npais;?>';
+	
+	$.ajax
+							  ({
+							   url: ' <?=URL_PM_APP_NEG?>muro/detalle_faena/',
+							   data : {  codigo : id, pais :_pais},
+							   type : 'post',
+							   cache: false,
+							   
+							   success: function(r3)
+							   {
+								 
+								$("#resultado_modal").html(r3);
+							   }
+							  
+		}); 
+	
+	
+	$("#exampleModalCenter").modal("show");
+ }
+ 
 </script> 
   <br><br>
 <div class="container">
@@ -175,7 +181,7 @@ function buscar(opcion){
   </div>
   
   
-	  <button onclick="buscar(1);" type="button" class="btn btn-primary btn-sm"  >Buscar con los criterios seleccionados</button><br><br>
+	  <button onclick="buscar();" type="button" class="btn btn-primary btn-sm"  >Buscar con los criterios seleccionados</button><br><br>
 	 
 	   
 </div>
@@ -218,7 +224,9 @@ function buscar(opcion){
   
 
 
-
+<button type="button" class="btn btn-primary  btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
+  Informar Cambios
+</button>
 </div>
 
 
@@ -230,15 +238,31 @@ function buscar(opcion){
 	<input type="hidden" name="parametro" id="parametro"  value="0"/>
 </form>
 
-<form id="detfa" name="detfa" method="post" action="<?=URL_PM_APP_NEG?>muro/trae_descripcion_faena/">
-
-	<input type="hidden" name="pais" id="pais"  value="<?=$pais;?>"/>
-	<input type="hidden" name="parame_2" id="parame_2"  value="0"/>
-	<input type="hidden" name="parame_3" id="parame_3"  value="0"/>
-	
-</form>
 
 
+<!-- Modal -->
+		<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		  <div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLongTitle"><h4>Detalle Faenas</h4>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				  <span aria-hidden="true">&times;</span>
+				</button>
+			  </div>
+			  <div class="modal-body">
+                 <div id ="resultado_modal"></div>
+		   
+
+			  </div>
+			  <div class="modal-footer">
+				
+				
+			  </div>
+			</div>
+		  </div>
+</div>
+<!-- Fin Modal -->
  
 
 </html>

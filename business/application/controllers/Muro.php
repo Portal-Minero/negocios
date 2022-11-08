@@ -446,11 +446,55 @@ function __construct()
 				if($pais==81){ $npais="CHILE";} else {$npais="PERU";}
 				
 				$datos['npais']                                  = $npais;
-				$datos['pais']                                   = $pais=81;
 				$datos['sectores']                               = $this->session->userdata('SES_sectores');
 				$this->load->view('View_muro/View_pide_empresa',$datos);
 			
 			}
+			
+			function detalle_faena(){
+				$this ->load->model ('Mod_empresa/Mod_empresa_minera','empresa_minera');
+				 if (!empty($_REQUEST['codigo'])) {
+					$codigo = $_REQUEST['codigo'];
+				 }
+				 
+				 
+				 if (!empty($_REQUEST['pais'])) {
+					$pais = $_REQUEST['pais'];
+				 }
+				 
+				 if($pais=="CHILE"){ $tabla     ="empresas_chilenas"; }
+				 if($pais=="PERU"){ $tabla      ="empresas_peruanas"; }
+				 $html="";
+				 
+				 $rs = $this->empresa_minera->buscar_detalle_faena($codigo,$tabla);
+				 if(is_array($rs) && sizeof($rs)){
+					  $html="<table width='100%' border='0' style='border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: dotted;
+	border-left-style: none;'>";
+					 foreach($rs as $r2){
+						 	 $html=$html."<tr><td><b>Nombre</b></td><td>".$r2['nombre']."</td></tr>";
+							 $html=$html."<tr><td><b>Estado</b></td><td>".$r2['estado']."</td></tr>";
+							 $html=$html."<tr><td><b>Minerales</b></td><td>".$r2['minerales']."</td></tr>";
+							 $html=$html."<tr><td><b>Operador</b></td><td>".$r2['operador']."</td></tr>";
+							 $html=$html."<tr><td><b>País</b></td><td>".$r2['pais']."</td></tr>";
+							 $html=$html."<tr><td><b>Dirección</b></td><td>".$r2['direccion']."</td></tr>";
+							 $html=$html."<tr><td><b>Fono</b></td><td>".$r2['fono']."</td></tr>";
+							 $html=$html."<tr><td><b>Fax</b></td><td>".$r2['fax']."</td></tr>";
+							 $html=$html."<tr><td><b>Sitio Web</b></td><td>".$r2['web']."</td></tr>";
+					 }
+					 
+					  $html=$html."</table>";
+				 }
+				 
+				 echo $html;
+			}
+			
+			
+			 
+			
+			
+			
 			
 			function trae_descripcion_faena22($ids=0){
 				$datos['sectores']                               = $this->session->userdata('SES_sectores');
@@ -480,13 +524,37 @@ function __construct()
 					$operador = $_REQUEST['operador'];
 				 }
 				 
-				$rs = $this-empresa_minera->buscar_empresas($texto, $tipo, $pais, $operador);
+				 if($pais=="CHILE"){ $tabla     ="empresas_chilenas"; }
+				 if($pais=="PERU"){ $tabla      ="empresas_peruanas"; }
+			     
+				 $texto     = "cobre";
+				 $tipo      = "minerales";
+				 
+				 $html="<h3 align='center'>No se encontraron resultados</h3>";
+				 $rs = $this->empresa_minera->buscar_empresas($texto, $tipo, $pais,$tabla);
 				
-				print_r($rs);
+				if(is_array($rs) && sizeof($rs)){
+				    $html="";
+				
+					foreach($rs as $r2){
+										$html=$html."<b>".$r2['operador']."</b><br>";
+										$rsf = $this->empresa_minera->buscar_empresa_faena( $r2['operador'], $pais,$tabla);
+										$ul="<ul>";
+										if(is_array($rsf) && sizeof($rsf)){
+											foreach($rsf as $rsf2){
+												$ul=$ul."<li onclick='ver(".$rsf2['codigo'].");'>Faena &nbsp;:&nbsp;&nbsp;<a href='#'>".$rsf2['nombre']."</a> </li>";
+											}
+										}
+										$ul=$ul."</ul>";
+										$html= $html. $ul."<hr>";
+					}
+				
+				}
+				echo $html;
 			}
 
 
-			
+			 
 			function trae_descripcion_faena($ids=0){
 				
 				
