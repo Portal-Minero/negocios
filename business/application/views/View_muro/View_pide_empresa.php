@@ -224,9 +224,7 @@ function ver(id){
   
 
 
-<button type="button" class="btn btn-primary  btn-sm" data-toggle="modal" data-target="#exampleModalCenter">
-  Informar Cambios
-</button>
+
 </div>
 
 
@@ -265,4 +263,7 @@ function ver(id){
 <!-- Fin Modal -->
  
 
-</html>
+<?php
+	 /*----------------- menu izquierdo --------------------*/
+     $this->load->view('includes/foot');
+?> 

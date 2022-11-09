@@ -115,4 +115,7 @@ Portal Minero articulará una serie de gestiones previas que permitirán, a los 
 
 
 
-</html>
+<?php
+	 /*----------------- menu izquierdo --------------------*/
+     $this->load->view('includes/foot');
+?> 

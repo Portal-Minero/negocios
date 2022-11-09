@@ -231,4 +231,7 @@
 
 
 
-</html>
+<?php
+	 /*----------------- menu izquierdo --------------------*/
+     $this->load->view('includes/foot');
+?> 

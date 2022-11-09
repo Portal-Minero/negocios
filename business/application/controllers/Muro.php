@@ -9,6 +9,7 @@ function __construct()
 				$this ->load->model ('Mod_muro/Mod_muro_general','muro');
 				$this ->load->model ('Mod_proyecto/Mod_general/Mod_general','general');
 				$this ->load->model ('Mod_proyecto/Mod_buscador/Mod_buscador','buscador');
+				$this ->load->model ('Mod_adjudicacion/Mod_adjudicacion','m_adjudicacion');
 				
 			}
 			
@@ -441,6 +442,11 @@ function __construct()
 			  
 			}
 			
+			function manejo_adjudicacion($op=0){
+				$datos['sectores']                               = $this->session->userdata('SES_sectores');
+				$this->load->view('View_muro/View_agregar_adjudicaciones',$datos);
+				
+			}
 			
 			function companias_mineras($pais=81){
 				if($pais==81){ $npais="CHILE";} else {$npais="PERU";}
@@ -451,9 +457,12 @@ function __construct()
 			
 			}
 			
+			
+			
 			function detalle_faena(){
 				$this ->load->model ('Mod_empresa/Mod_empresa_minera','empresa_minera');
-				 if (!empty($_REQUEST['codigo'])) {
+				
+				if (!empty($_REQUEST['codigo'])) {
 					$codigo = $_REQUEST['codigo'];
 				 }
 				 
@@ -464,42 +473,18 @@ function __construct()
 				 
 				 if($pais=="CHILE"){ $tabla     ="empresas_chilenas"; }
 				 if($pais=="PERU"){ $tabla      ="empresas_peruanas"; }
-				 $html="";
 				 
-				 $rs = $this->empresa_minera->buscar_detalle_faena($codigo,$tabla);
-				 if(is_array($rs) && sizeof($rs)){
-					  $html="<table width='100%' border='0' style='border-top-style: none;
-	border-right-style: none;
-	border-bottom-style: dotted;
-	border-left-style: none;'>";
-					 foreach($rs as $r2){
-						 	 $html=$html."<tr><td><b>Nombre</b></td><td>".$r2['nombre']."</td></tr>";
-							 $html=$html."<tr><td><b>Estado</b></td><td>".$r2['estado']."</td></tr>";
-							 $html=$html."<tr><td><b>Minerales</b></td><td>".$r2['minerales']."</td></tr>";
-							 $html=$html."<tr><td><b>Operador</b></td><td>".$r2['operador']."</td></tr>";
-							 $html=$html."<tr><td><b>País</b></td><td>".$r2['pais']."</td></tr>";
-							 $html=$html."<tr><td><b>Dirección</b></td><td>".$r2['direccion']."</td></tr>";
-							 $html=$html."<tr><td><b>Fono</b></td><td>".$r2['fono']."</td></tr>";
-							 $html=$html."<tr><td><b>Fax</b></td><td>".$r2['fax']."</td></tr>";
-							 $html=$html."<tr><td><b>Sitio Web</b></td><td>".$r2['web']."</td></tr>";
-					 }
-					 
-					  $html=$html."</table>";
-				 }
-				 
-				 echo $html;
+				
+				$datos['sectores']        = $this->session->userdata('SES_sectores');
+				$datos['detalle_faena']   = $this->empresa_minera->buscar_detalle_faena($codigo,$tabla);
+				$this->load->view('View_muro/View_detalle_faena',$datos);
 			}
 			
 			
-			 
 			
 			
 			
 			
-			function trae_descripcion_faena22($ids=0){
-				$datos['sectores']                               = $this->session->userdata('SES_sectores');
-				$this->load->view('View_muro/View_equipos_detalle_faena',$datos);
-			}
 			
 			function listado_empresas_mineras(){
 								

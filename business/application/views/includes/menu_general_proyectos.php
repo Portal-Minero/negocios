@@ -37,7 +37,7 @@
 		  <li><a href="<?=URL_PM_APP_NEG;?>Directorio/informacion_directorio">Información Directorio</a></li>
 		  <li> Mis Adjudicaciones</li>
 		  <li> Historial de Mis Cambios</li>
-		  <li> Agregar Adjudicaciones</li>
+		  <li><a href="<?=URL_PM_APP_NEG;?>muro/manejo_adjudicacion/1/">Agregar Adjudicaciones</a></li>
 		  <li> Comparador Básico</li>
 		  <li> Curriculum Técnico </li>
     </ul>
@@ -95,3 +95,4 @@
 		  
 	 </ul>
 	</div>
+	<br><br>
