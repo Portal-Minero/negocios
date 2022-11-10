@@ -69,6 +69,80 @@
 	  	  
 	  </div>
 	  
+	  
+	  <br>
+	  
+	<div clas="table-responsive">
+	 <label for="inputPassword5" class="form-label">Nombre de Adjudicación</label>
+    <input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto adjudicacion"><br>
+    <table class="table table-hover">
+    <thead>
+    <tr bgcolor="#066293">
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      
+    </tr>
+  </thead>   
+    <tbody>
+       
+		
+        <tr>
+					<td> 
+					<label for="inputPassword5" class="form-label">Fecha Adjudicación Trimestre</label>
+			<select  style="width: 200px" class="combobox form-control" name="tipo" id="tipo">
+			   
+				
+				<option value="">- trimestre -</option>
+				<option value="1">1° Trimestre</option>
+				<option value="2">2° Trimestre</option>
+				<option value="3">3° Trimestre</option>
+				<option value="4">4° Trimestre</option>
+				
+			</select>
+			
+			
+			
+			</td>
+			<td>
+					<label for="inputPassword5" class="form-label">Fecha Adjudicación Año</label>
+					<select  style="width: 200px" class="combobox form-control" name="tipo" id="tipo">
+					<option value="">- Año -</option>
+					<? for ($i = 2010; $i <= 2073; $i++) { ?>
+					
+					  <option value="<?=$i;?>"><?=$i;?></option> 
+					  <? }?>
+					</select>
+			</td>
+			
+			<td>
+				<label for="inputPassword5" class="form-label">Nombre Proyecto</label>
+				<input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"><span style="font-size:10px; font-weight:bold; color:#999;">Si corresponde,  indique el proyecto de inversión del cual proviene este contrato.</span>
+			</td>
+            
+    </tr>
+		
+	<tr>
+			<td>
+				<label for="inputPassword5" class="form-label">Fecha Inicio Contrato</label>
+				<input type="date" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto adjudicacion"><span style="font-size:10px; font-weight:bold; color:#999;">En caso que corresponda.</span>
+		   </td>
+		   <td>
+				<label for="inputPassword5" class="form-label">Duración del Contrato (en Días)</label>
+				<input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto adjudicacion">
+		   </td>
+		  
+		   <td>
+				<label for="inputPassword5" class="form-label">Licitación:</label>
+				<input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto Licitación"><span style="font-size:10px; font-weight:bold; color:#999;">Si corresponde, indique la licitación de la que proviene este contrato.</span>
+           </td>
+	</tr>
+		
+     </tbody>
+    </table>
+
+</div>	  
+	  
     </div>
   <div class="col-sm-3">
     <div style="font-size: 11px;padding: 5px;">
