@@ -35,14 +35,14 @@ $item_meu_proyecto=$item_meu_proyecto."<li> <a href='#' onclick='seleccion_menu_
       <ul>
 		  <li><a href="<?=URL_PM_APP_NEG;?>muro/informacion_membresia">Información Membresía</a></li>
 		  <li><a href="<?=URL_PM_APP_NEG;?>Directorio/informacion_directorio">Información Directorio</a></li>
-		  <li> Mis Adjudicaciones</li>
+		 <li><a href="<?=URL_PM_APP_NEG;?>muro/listar_mis_adjudicaciones/0/">Mis Adjudicaciones</a></li>
 		  <li> Historial de Mis Cambios</li>
 		 <li><a href="<?=URL_PM_APP_NEG;?>muro/manejo_adjudicacion/1/">Agregar Adjudicaciones</a></li>
 		  <li> Comparador Básico</li>
 		  <li> Curriculum Técnico </li>
     </ul>
 	  <hr>
-	  
+	      
 	  <h5><b>Proyectos</b></h5>
       <ul>
 		  

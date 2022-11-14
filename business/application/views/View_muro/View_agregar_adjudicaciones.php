@@ -5,20 +5,15 @@
  
  
 ?>
-<!DOCTYPE html>
-<html lang="en">  
-<head>
-  <title>Portal Minero</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-  
-  <script>
-  /* carga buscador_proyectos 
-    lo envia al muro/buscador_proyectos
-  
-  */
-  
+
+
+
+<?php
+  $this->load->view('includes/header');
+?>
+
+<script>
+
   function seleccion_vista_buscador_proyectos(p,t){
 	  	 
 	  document.getElementById("seleccion").value=p;
@@ -26,12 +21,95 @@
 	  document.form1.submit(); 
 	 
   }
-  </script>
   
-</head>
+  
+  
+  
+  function trae_region(){
+  var _pais = $("#pais").val();
+  
+  $.ajax
+							  ({
+							   url: ' <?=URL_PM_APP_NEG?>muro/combo_region_pais/',
+							   data : { pais :_pais },
+							   type : 'post',
+							   cache: false,
+							   
+							   success: function(r3)
+							   {
+								 
+								$("#region").html(r3);
+							   }
+							  
+		}); 
+		
+  }		
+
+
+ function grabar(){
+	alert(1);
+	 
+var _nombre_adj          =   $("#nombre_adj").val();
+var _trim_fecha_adj      =   $("trim_fecha_adj").val();
+var _ano_fecha_adj       =   $("ano_fecha_adj").val();
+var _id_proy_adj         =   $("id_proy_adj").val();
+var _inicio_contrato     =   $("inicio_contrato").val();
+var _duracion_contrato   =   $("duracion_contrato").val();
+var _id_lici_adj         =   $("id_lici_adj").val();
+var _monto_aprox_adj     =   $("monto_aprox_adj").val();
+var _id_rango            =   $("id_rango").val();
+var _id_sector           =   $("id_sector").val();
+var _otro_comprador      =   $("otro_comprador").val();
+var _Pais                =   $("Pais").val();
+var _region              =   $("region").val();
+var _id_via              =   $("id_via").val();
+var _equipos_suministros =   $("equipos_suministros").val();
+var _descripcion_adj     =   $("descripcion_adj").val();
+
+if(   ! val_campo_js(_nombre_adj)  ){ alert("Debe indicar  _nombre_adj "); return false }
+
+/*
+if(  ! val_campo_js(_trim_fecha_adj) ){ alert("Debe indicar  _trim_fecha_adj  "); return false }
+if(  ! val_ano_fecha_adj) ){ alert("Debe indicar  _ano_fecha_adj  "); return false }
+if(  ! val_campo_js(_id_proy_adj) ){ alert("Debe indicar _id_proy_adj "); return false }
+if(  ! val_campo_js(_inicio_contrato) ){ alert("Debe indicar  _inicio_contrato  "); return false }
+if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
+if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
+if(  ! val_campo_js(_id_lici_adj) ){ alert("Debe indicar   _id_lici_adj   "); return false }
+if(  ! val_campo_js(_monto_aprox_ad) ){ alert("Debe indicar   _monto_aprox_adj "); return false }
+if(  ! val_campo_js(_id_rango) ){ alert("Debe indicar _id_rango "); return false }
+if(  ! val_campo_js(_id_sector) ){ alert("Debe indicar _id_sector "); return false }
+if(  ! val_campo_js(_otro_comprador) ){ alert("Debe indicar _otro_comprador "); return false }
+if(  ! val_campo_js(_nombre_adj) ){ alert("Debe indicar nombre_adj "); return false }
+if(  ! val_campo_js(_region) ){ alert("Debe indicar _region "); return false }
+if(  ! val_campo_js(_id_vi) ){ alert("Debe indicar _id_via "); return false }
+if(  ! val_campo_js(_equipos_suministros) ){ alert("Debe indicar _equipos_suministros "); return false }
+if(  ! val_campo_js(_descripcion_adj) ){ alert("Debe indicar _descripcion_adj "); return false } 
+*/	 
+	 
+	
+	 
+	 
+ }	
+
+
+function val_campo_js(c){
+	  rc= true;
+	  var text=c;
+	  alert(text);
+	  if(text==""){  return false;}
+      var result = text.trim(); 
+	  if (result.value.length < 2) {
+		   rc= false;
+      }
+	  return true;
+}
+	
+ </script>
+
 <body>
   
-  <br><br>
+ <br><br>
 <div class="container">
 		
 		
@@ -48,7 +126,7 @@
 </div>
 	  <p>&nbsp;</p>
 	  
-	  
+	 
   <div class="row">
     <?php
 	 /*----------------- menu izquierdo --------------------*/
@@ -64,8 +142,8 @@
 	<div  style="background-color: #066293;"><h5 style="color:white;height: 40px;"><br>&nbsp;&nbsp;Datos de la adjudicación</h5></div>
       <div>
       
-      <label for="inputPassword5" class="form-label">Nombre Adjudicacion <FONT COLOR="red">&nbsp;(*)</FONT></label>
-				<input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock">
+      <label for="nombre_adj" class="form-label">Nombre Adjudicacion <FONT COLOR="red">&nbsp;(*)</FONT></label>
+				<input type="text" id="nombre_adj" class="form-control" aria-describedby="passwordHelpBlock">
 				
 				
       <table class="table">
@@ -80,8 +158,8 @@
   <tbody>
     <tr>
       <th scope="row">1</th>
-      <td><label for="inputPassword5" class="form-label">Adjudicación Trimestre <FONT COLOR="red">&nbsp;(*)</FONT></label>
-			<select  style="width: 100%px" class="combobox form-control" name="tipo" id="tipo">
+      <td><label for="trim_fecha_adj" class="form-label">Adjudicación Trimestre <FONT COLOR="red">&nbsp;(*)</FONT></label>
+			<select  style="width: 100%px" class="combobox form-control" name="trim_fecha_adj" id="trim_fecha_adj">
 			   
 				
 				<option value="">- trimestre -</option>
@@ -91,32 +169,32 @@
 				<option value="4">4° Trimestre</option>
 				
 			</select></td>
-      <td><label for="inputPassword5" class="form-label">Adjudicación Año<FONT COLOR="red">&nbsp;(*)</FONT></label>
-					<select  style="width: 100%px" class="combobox form-control" name="tipo" id="tipo">
+      <td><label for="ano_fecha_adj" class="form-label">Adjudicación Año<FONT COLOR="red">&nbsp;(*)</FONT></label>
+					<select  style="width: 100%px" class="combobox form-control" name="ano_fecha_adj" id="ano_fecha_adj">
 					<option value="">- Año -</option>
 					<? for ($i = 2010; $i <= 2073; $i++) { ?>
 					
 					  <option value="<?=$i;?>"><?=$i;?></option> 
 					  <? }?>
 					</select></td>
-      <td><label for="inputPassword5" class="form-label">Nombre Proyecto</label>
-				<input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"><span style="font-size:10px; font-weight:bold; color:#999;">Si corresponde,  indique el proyecto de inversión del cual proviene este contrato.</span></td>
+      <td><label for="id_proy_adj" class="form-label">Nombre Proyecto</label>
+				<input type="text" id="id_proy_adj" class="form-control" aria-describedby="passwordHelpBlock"><span style="font-size:10px; font-weight:bold; color:#999;">Si corresponde,  indique el proyecto de inversión del cual proviene este contrato.</span></td>
     </tr>
     <tr>
       <th scope="row">2</th>
-      <td><label for="inputPassword5" class="form-label">Fecha Inicio Contrato</label>
-				<input type="date" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto adjudicacion"><span style="font-size:10px; font-weight:bold; color:#999;">En caso que corresponda.</span></td>
-      <td><label for="inputPassword5" class="form-label">Duración Días Contrato </label>
-				<input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Numero dias contrato"><span style="font-size:10px; font-weight:bold; color:#999;">Indice el numero de dias.</span></td>
-      <td><label for="inputPassword5" class="form-label">Licitación:</label>
-				<input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto Licitación"><span style="font-size:10px; font-weight:bold; color:#999;">Si corresponde, indique la licitación de la que proviene este contrato.</span></td>
+      <td><label for="inicio_contrato" class="form-label">Fecha Inicio Contrato</label>
+				<input type="date" id="inicio_contrato" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto adjudicacion"><span style="font-size:10px; font-weight:bold; color:#999;">En caso que corresponda.</span></td>
+      <td><label for="duracion_contrato" class="form-label">Duración Días Contrato </label>
+				<input type="number" id="duracion_contrato" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Numero dias contrato"><span style="font-size:10px; font-weight:bold; color:#999;">Indice el numero de dias.</span></td>
+      <td><label for="id_lici_adj" class="form-label">Licitación:</label>
+				<input type="text" id="id_lici_adj" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto Licitación"><span style="font-size:10px; font-weight:bold; color:#999;">Si corresponde, indique la licitación de la que proviene este contrato.</span></td>
     </tr>
     <tr>
       <th scope="row">3</th>
-      <td> <label for="inputPassword5" class="form-label">Monto Aproximado (USD) <FONT COLOR="red">&nbsp;(*)</FONT></label>
-				<input type="number" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Numero dias contrato"></td>
-      <td><label for="inputPassword5" class="form-label">Rango Monto (USD)<FONT COLOR="red">&nbsp;(*)</FONT><FONT COLOR="red">&nbsp;(*)</FONT></label>
-			<select  style="width: 100%px" class="combobox form-control" name="tipo" id="tipo">
+      <td> <label for="monto_aprox_adj" class="form-label">Monto Aproximado (USD) <FONT COLOR="red">&nbsp;(*)</FONT></label>
+				<input type="number" id="monto_aprox_adj" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Numero dias contrato"></td>
+      <td><label for="id_rango" class="form-label">Rango Monto (USD)<FONT COLOR="red">&nbsp;(*)</FONT><FONT COLOR="red">&nbsp;(*)</FONT></label>
+			<select  style="width: 100%px" class="combobox form-control" name="id_rango" id="id_rango">
 			   
 				
 				<option value="">- Seleccione Rango (USD) -</option>
@@ -175,8 +253,8 @@
 				
 			</select></td>
       <td>
-	  <label for="inputPassword5" class="form-label">Vía de Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></label>
-			<select  style="width: 100%px" class="combobox form-control" name="tipo" id="tipo">
+	  <label for="id_sector" class="form-label">Vía de Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></label>
+			<select  style="width: 100%px" class="combobox form-control" name="id_sector" id="id_sector">
 			   
 				
 				<option value="">- Sector Comprador: -</option>
@@ -195,27 +273,25 @@
     </tr>
 	<tr>
       <th scope="row">4</th>
-      <td><label for="inputPassword5" class="form-label">Comprador<FONT COLOR="red">&nbsp;(*)</FONT></label>
-				<input type="text" id="inputPassword5" class="form-control" aria-describedby="passwordHelpBlock"></td>
-      <td><label for="inputPassword5" class="form-label">Pais<FONT COLOR="red">&nbsp;(*)</FONT></label>
-			<select  style="width: 100%px" class="combobox form-control" name="tipo" id="tipo">
-			   
-				
-				<option value="">- Pais -</option>
-																					<option value="1">Licitación Abierta</option>
-																					<option value="2">Licitación Cerrada</option>
-																					<option value="3">Adjudicación Directa</option>
-																			</select>
+      <td><label for="otro_comprador" class="form-label">Comprador<FONT COLOR="red">&nbsp;(*)</FONT></label>
+				<input type="text" id="otro_comprador" class="form-control" aria-describedby="passwordHelpBlock"></td>
+      <td><label for="pais" class="form-label">Pais<FONT COLOR="red">&nbsp;(*)</FONT></label>
+			<select  style="width: 100%px" class="combobox form-control" name="pais" id="pais" onchange="trae_region();">
+           <option value="">- Seleccione Pais -</option>
+			<option value="81">Chile</option>
+			   <? foreach ($paises as $row)  {?>
+				<option value="<? echo $row['id_pais']; ?>"><? echo $row['Nombre_pais']; ?></option>
+				 <? } ?>
+				</select>
 				
 			</select></td>
-      <td><label for="inputPassword5" class="form-label">Región<FONT COLOR="red">&nbsp;(*)</FONT></label>
-			<select  style="width: 100%px" class="combobox form-control" name="tipo" id="tipo">
+      <td><label for="region" class="form-label">Región<FONT COLOR="red">&nbsp;(*)</FONT></label>
+			<select  style="width: 100%px" class="combobox form-control" name="region" id="region">
 			   
 				
 				<option value="">- Seleccione Región -</option>
-																					<option value="1">Licitación Abierta</option>
-																					<option value="2">Licitación Cerrada</option>
-																					<option value="3">Adjudicación Directa</option>
+				
+				
 																			</select>
 				
 			</select></td>
@@ -224,8 +300,8 @@
   </tbody>
 </table>
 <hr>
-<label for="inputPassword5" class="form-label">Vía de Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></label>
-			<select  style="width: 100%px" class="combobox form-control" name="tipo" id="tipo">
+<label for="id_via" class="form-label">Vía de Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></label>
+			<select  style="width: 100%px" class="combobox form-control" name="id_via" id="id_via">
 			   
 				
 				<option value="">- Seleccione Vía de Adjudicación -</option>
@@ -235,13 +311,13 @@
 																			</select>
 				
 			</select>
- <span class="input-group-text"><br><b>Equipos, Suministros y/o Servicios Adjudicados<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
-  <textarea class="form-control" aria-label="With textarea"></textarea>   
+ <span class="equipos_suministros"><br><b>Equipos, Suministros y/o Servicios Adjudicados<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
+  <textarea id="equipos_suministros" class="form-control" aria-label="With textarea"></textarea>   
 
-<span class="input-group-text"><br><b>Descripción de la Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
-  <textarea class="form-control" aria-label="With textarea"></textarea>  <hr>
+<span class="descripcion_adj"><br><b>Descripción de la Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
+  <textarea id="descripcion_adj" class="form-control" aria-label="With textarea"></textarea>  <hr>
       <FONT COLOR="red">&nbsp;<b>(*)  Los campos marcados son obligatorios</b></FONT><br>
-      <br><button onclick="retorna_sectores_selecionados();" type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+      <br><button onclick="grabar();" type="button" class="btn btn-primary btn-sm">
   Grabar Adjudicación
 </button>
       

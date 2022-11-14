@@ -10,7 +10,7 @@ function __construct()
 				$this ->load->model ('Mod_proyecto/Mod_general/Mod_general','general');
 				$this ->load->model ('Mod_proyecto/Mod_buscador/Mod_buscador','buscador');
 				$this ->load->model ('Mod_adjudicacion/Mod_adjudicacion','m_adjudicacion');
-				
+				$this ->load->model ('Mod_utiles/Mod_Comunes','m_utiles');
 			}
 			
 			public function index()
@@ -442,11 +442,31 @@ function __construct()
 			  
 			}
 			
+			function combo_region_pais(){
+				$pais="";
+				 if (!empty($_REQUEST['pais'])) {
+					 $pais = $_REQUEST['pais'];
+				 }
+				
+				$css= "  style='width: 100%px' class='combobox form-control'  ";
+				echo  $this->m_utiles->mostrar_region_pais_combo($pais,"region",$css);
+			}
+			
+			
 			function manejo_adjudicacion($op=0){
-				$datos['sectores']                               = $this->session->userdata('SES_sectores');
+				$datos['sectores']                         = $this->session->userdata('SES_sectores');
+				$datos['paises']                           = $this->m_utiles->mostrar_paises();
 				$this->load->view('View_muro/View_agregar_adjudicaciones',$datos);
 				
 			}
+			
+			function listar_mis_adjudicaciones(){
+			    $datos['sectores']                          = $this->session->userdata('SES_sectores');
+				
+				$this->load->view('View_muro/View_listar_mis_adjudicaciones',$datos);
+			
+			}
+			
 			
 			function companias_mineras($pais=81){
 				if($pais==81){ $npais="CHILE";} else {$npais="PERU";}
