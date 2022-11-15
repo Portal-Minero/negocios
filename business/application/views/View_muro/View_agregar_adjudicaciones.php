@@ -46,65 +46,70 @@
   }		
 
 
- function grabar(){
-	alert(1);
+function grabar(){
 	 
-var _nombre_adj          =   $("#nombre_adj").val();
-var _trim_fecha_adj      =   $("trim_fecha_adj").val();
-var _ano_fecha_adj       =   $("ano_fecha_adj").val();
-var _id_proy_adj         =   $("id_proy_adj").val();
-var _inicio_contrato     =   $("inicio_contrato").val();
-var _duracion_contrato   =   $("duracion_contrato").val();
-var _id_lici_adj         =   $("id_lici_adj").val();
-var _monto_aprox_adj     =   $("monto_aprox_adj").val();
-var _id_rango            =   $("id_rango").val();
-var _id_sector           =   $("id_sector").val();
-var _otro_comprador      =   $("otro_comprador").val();
-var _Pais                =   $("Pais").val();
-var _region              =   $("region").val();
-var _id_via              =   $("id_via").val();
-var _equipos_suministros =   $("equipos_suministros").val();
-var _descripcion_adj     =   $("descripcion_adj").val();
-
-if(   ! val_campo_js(_nombre_adj)  ){ alert("Debe indicar  _nombre_adj "); return false }
-
-/*
-if(  ! val_campo_js(_trim_fecha_adj) ){ alert("Debe indicar  _trim_fecha_adj  "); return false }
-if(  ! val_ano_fecha_adj) ){ alert("Debe indicar  _ano_fecha_adj  "); return false }
-if(  ! val_campo_js(_id_proy_adj) ){ alert("Debe indicar _id_proy_adj "); return false }
-if(  ! val_campo_js(_inicio_contrato) ){ alert("Debe indicar  _inicio_contrato  "); return false }
-if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
-if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
-if(  ! val_campo_js(_id_lici_adj) ){ alert("Debe indicar   _id_lici_adj   "); return false }
-if(  ! val_campo_js(_monto_aprox_ad) ){ alert("Debe indicar   _monto_aprox_adj "); return false }
-if(  ! val_campo_js(_id_rango) ){ alert("Debe indicar _id_rango "); return false }
-if(  ! val_campo_js(_id_sector) ){ alert("Debe indicar _id_sector "); return false }
-if(  ! val_campo_js(_otro_comprador) ){ alert("Debe indicar _otro_comprador "); return false }
-if(  ! val_campo_js(_nombre_adj) ){ alert("Debe indicar nombre_adj "); return false }
-if(  ! val_campo_js(_region) ){ alert("Debe indicar _region "); return false }
-if(  ! val_campo_js(_id_vi) ){ alert("Debe indicar _id_via "); return false }
-if(  ! val_campo_js(_equipos_suministros) ){ alert("Debe indicar _equipos_suministros "); return false }
-if(  ! val_campo_js(_descripcion_adj) ){ alert("Debe indicar _descripcion_adj "); return false } 
-*/	 
 	 
-	
+		var _nombre_adj          =   $("#nombre_adj").val();
+		var _trim_fecha_adj      =   $("#trim_fecha_adj").val();
+		var _ano_fecha_adj       =   $("#ano_fecha_adj").val();
+		var _id_proy_adj         =   $("#id_proy_adj").val();
+		var _inicio_contrato     =   $("#inicio_contrato").val();
+		var _duracion_contrato   =   $("#duracion_contrato").val();
+		var _id_lici_adj         =   $("#id_lici_adj").val();
+		var _monto_aprox_adj     =   $("#monto_aprox_adj").val();
+		var _id_rango            =   $("#id_rango").val();
+		var _id_sector           =   $("#id_sector").val();
+		var _otro_comprador      =   $("#otro_comprador").val();
+		var _pais                =   $("#pais").val();
+		var _region              =   $("#region").val();
+		var _id_via              =   $("#id_via").val();
+		var _equipos_suministros =   $("#equipos_suministros").val();
+		var _descripcion_adj     =   $("#descripcion_adj").val();
+/*---------------------------------------------------------------------------------------------------------------------------------*/
+		if(  ! val_campo_js(_nombre_adj,1,0)  ){ alert("Debe indicar  Nombre de Adjudicación, texto muy corto. "); return false }
+		if(  ! val_campo_js(_trim_fecha_adj,0,0) ){ alert("Debe indicar Fecha Adjudicación  "); return false }
+		if(  ! val_campo_js(_ano_fecha_adj,0,0) ){ alert("Debe indicar Año Adjudicación "); return false }
+		if(  ! val_campo_js(_monto_aprox_adj,0,0) ){ alert("Debe indicar   _monto_aprox_adj "); return false }
+		if(  ! val_campo_js(_id_rango,0,0 ) ){ alert("Debe indicar Rango Monto (USD) "); return false }
+       	if(  ! val_campo_js(_otro_comprador,1,0) ){ alert("Debe indicar _otro_comprador, texto muy corto.  "); return false }
+		if(  ! val_campo_js(_id_sector,0,0) ){ alert("Debe indicar _id_sector "); return false }
+        if(  ! val_campo_js( _pais,0,0)  ){ alert("Debe indicar País "); return false }
+        if(  ! val_campo_js( _region,0,0)  ){ alert("Debe indicar Región "); return false }
+        if(  ! val_campo_js(_id_via,0,0 ) ){ alert("Debe indicar Vía de Adjudicación "); return false }
+		alert(199);
+        if(  ! val_campo_js(_equipos_suministros,1,0) ){ alert("Debe indicar Equipos y suministros "); return false }
+        if(  ! val_campo_js(_descripcion_adj,1,0) ){ alert("Debe indicar Descripción de la Adjudicación "); return false } 
+ 
+/*---------------------------------------------------------------------------------------------------------------------------------*/		
+		
+		
+		
+		//if(  ! val_campo_js(_id_proy_adj) ){ alert("Debe indicar _id_proy_adj "); return false }
+		//if(  ! val_campo_js(_inicio_contrato) ){ alert("Debe indicar  _inicio_contrato  "); return false }
+		//if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
+		//if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
+		//if(  ! val_campo_js(_id_lici_adj) ){ alert("Debe indicar   _id_lici_adj   "); return false }
+		//if(  ! val_campo_js(_monto_aprox_ad) ){ alert("Debe indicar   _monto_aprox_adj "); return false }
+		//if(  ! val_campo_js(_id_rango) ){ alert("Debe indicar _id_rango "); return false }
+		//if(  ! val_campo_js(_id_sector) ){ alert("Debe indicar _id_sector "); return false }
+		//if(  ! val_campo_js(_otro_comprador) ){ alert("Debe indicar _otro_comprador "); return false }
+		//if(  ! val_campo_js(_nombre_adj) ){ alert("Debe indicar nombre_adj "); return false }
+		//if(  ! val_campo_js(_region) ){ alert("Debe indicar _region "); return false }
+		//if(  ! val_campo_js(_id_vi) ){ alert("Debe indicar _id_via "); return false }
+		//if(  ! val_campo_js(_equipos_suministros) ){ alert("Debe indicar _equipos_suministros "); return false }
+		//if(  ! val_campo_js(_descripcion_adj) ){ alert("Debe indicar _descripcion_adj "); return false } 
+	 
+	 
+return true;
 	 
 	 
  }	
 
 
-function val_campo_js(c){
-	  rc= true;
-	  var text=c;
-	  alert(text);
-	  if(text==""){  return false;}
-      var result = text.trim(); 
-	  if (result.value.length < 2) {
-		   rc= false;
-      }
-	  return true;
-}
-	
+
+
+
+		
  </script>
 
 <body>
@@ -185,15 +190,15 @@ function val_campo_js(c){
       <td><label for="inicio_contrato" class="form-label">Fecha Inicio Contrato</label>
 				<input type="date" id="inicio_contrato" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto adjudicacion"><span style="font-size:10px; font-weight:bold; color:#999;">En caso que corresponda.</span></td>
       <td><label for="duracion_contrato" class="form-label">Duración Días Contrato </label>
-				<input type="number" id="duracion_contrato" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Numero dias contrato"><span style="font-size:10px; font-weight:bold; color:#999;">Indice el numero de dias.</span></td>
+				<input  onkeypress="return valideKey(event);" type="text" id="duracion_contrato" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Numero dias contrato"><span style="font-size:10px; font-weight:bold; color:#999;">Indice el numero de dias.</span></td>
       <td><label for="id_lici_adj" class="form-label">Licitación:</label>
 				<input type="text" id="id_lici_adj" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Texto Licitación"><span style="font-size:10px; font-weight:bold; color:#999;">Si corresponde, indique la licitación de la que proviene este contrato.</span></td>
     </tr>
     <tr>
       <th scope="row">3</th>
       <td> <label for="monto_aprox_adj" class="form-label">Monto Aproximado (USD) <FONT COLOR="red">&nbsp;(*)</FONT></label>
-				<input type="number" id="monto_aprox_adj" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Numero dias contrato"></td>
-      <td><label for="id_rango" class="form-label">Rango Monto (USD)<FONT COLOR="red">&nbsp;(*)</FONT><FONT COLOR="red">&nbsp;(*)</FONT></label>
+				<input type="text" id="monto_aprox_adj" class="form-control" aria-describedby="passwordHelpBlock" placeholder="Monto Aproximado"  pattern="[0-9]+" onkeypress="return valideKey(event);" ></td>
+      <td><label for="id_rango" class="form-label">Rango Monto (USD)<FONT COLOR="red">&nbsp;(*)</FONT></label>
 			<select  style="width: 100%px" class="combobox form-control" name="id_rango" id="id_rango">
 			   
 				
@@ -253,13 +258,13 @@ function val_campo_js(c){
 				
 			</select></td>
       <td>
-	  <label for="id_sector" class="form-label">Vía de Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></label>
+	  <label for="id_sector" class="form-label">Sector Comprador<FONT COLOR="red">&nbsp;(*)</FONT></label>
 			<select  style="width: 100%px" class="combobox form-control" name="id_sector" id="id_sector">
 			   
 				
-				<option value="">- Sector Comprador: -</option>
+				
 																					<option value="">- Sector -</option>
-																																<option value="2">Energía</option>
+																						<option value="2">Energía</option>
 																						<option value="7">Forestal</option>
 																						<option value="6">Industrial</option>
 																						<option value="3">Infraestructura</option>
