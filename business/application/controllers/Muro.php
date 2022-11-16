@@ -460,6 +460,119 @@ function __construct()
 				
 			}
 			
+			
+			function graba_adjudicaciones_usuario(){
+				$data =array();
+			    $datos['sectores']                          = $this->session->userdata('SES_sectores');
+				/*-----------------------------------------------------------------------------------*/
+				$nombre_adj          ="";
+				$trim_fecha_adj      ="";
+				$ano_fecha_adj       ="";
+				$id_proy_adj         ="";
+				$inicio_contrato     ="";
+				$duracion_contrato   ="";
+				$id_lici_adj         ="";
+				$monto_aprox_adj     ="";
+				$id_rango            ="";
+				$id_sector           ="";
+				$otro_comprador      ="";
+				$region              ="";
+				$id_via              ="";
+				$equipos_suministros ="";
+				$descripcion_adj     ="";
+				$id_socio_adj        ="";
+				$pais                ="";
+				
+				$Razon_social_emp    = "";
+				$username            = "";
+				$password_socio      = "";
+				$cargo_contacto      = "";
+				$email_contacto      = "";
+				$direccion_contacto  = "";
+				$id_socio_adj        = "";
+				$fecha_ingreso_adj   = "";	
+				
+				
+				
+				$rcad = $this->m_adjudicacion->trae_usuarios_socios();
+				 
+				 foreach ($rcad as $row) {
+						$Razon_social_emp       =    $row['Razon_social_emp'];
+						$username               = 	 $row['username_socio'];
+						$password_socio         = 	 $row['password_socio'];
+						$cargo_contacto         = 	 $row['cargo_socio'];
+						$email_contacto         = 	 $row['email_socio'];
+						$direccion_contacto     = 	 $row['Direccion_emp'];
+						$id_socio_adj           =    $this->session->userdata('SES_id_socio')
+						$id_socio               =    $this->session->userdata('SES_id_socio')
+				}
+				
+				
+				date_default_timezone_set('America/Santiago');
+                //$date = date('m/d/Y h:i:s a', time());
+				
+				$fecha_ingreso_adj =  date('m/d/Y h:i:s a', time());
+				
+				
+				
+				
+				
+				
+				if (!empty($_REQUEST['nombre_adj'])) { $nombre_adj = $_REQUEST['nombre_adj']; }
+				if (!empty($_REQUEST['trim_fecha_adj'])) { $trim_fecha_adj = $_REQUEST['trim_fecha_adj']; }
+				if (!empty($_REQUEST['ano_fecha_adj'])) { $ano_fecha_adj = $_REQUEST['ano_fecha_adj']; }
+				if (!empty($_REQUEST['id_proy_adj'])) { $id_proy_adj = $_REQUEST['id_proy_adj']; }
+				if (!empty($_REQUEST['inicio_contrato'])) { $inicio_contrato = $_REQUEST['inicio_contrato']; }
+				if (!empty($_REQUEST['duracion_contrato'])) { $duracion_contrato = $_REQUEST['duracion_contrato']; }
+				if (!empty($_REQUEST['id_lici_adj'])) { $id_lici_adj= $_REQUEST['id_lici_adj']; }
+				if (!empty($_REQUEST['monto_aprox_adj'])) { $monto_aprox_adj = $_REQUEST['monto_aprox_adj']; }
+				if (!empty($_REQUEST['id_rango'])) { $id_rango = $_REQUEST['id_rango']; }
+				if (!empty($_REQUEST['id_sector'])) { $id_sector = $_REQUEST['id_sector']; }
+				if (!empty($_REQUEST['otro_comprador'])) { $otro_comprador = $_REQUEST['otro_comprador']; }
+				if (!empty($_REQUEST['pais'])) { $pais = $_REQUEST['pais']; }
+				if (!empty($_REQUEST['region'])) { $region = $_REQUEST['region']; }
+				if (!empty($_REQUEST['id_via'])) { $id_via = $_REQUEST['id_via']; }
+				if (!empty($_REQUEST['equipos_suministros'])) { $equipos_suministros = $_REQUEST['equipos_suministros']; }
+				if (!empty($_REQUEST['descripcion_adj'])) { $descripcion_adj = $_REQUEST['descripcion_adj']; }
+				if (!empty($_REQUEST['id_socio_adj'])) { $id_socio_adj = $_REQUEST['id_socio_adj']; }
+				
+                				
+				
+				$data = array(
+				'nombre_adj'=>$nombre_adj,
+				'trim_fecha_adj'=>$trim_fecha_adj,
+				'ano_fecha_adj'=>$ano_fecha_adj,
+				'id_proy_adj'=>$id_proy_adj,
+				'inicio_contrato'=>$inicio_contrato,
+				'duracion_contrato'=>$duracion_contrato,
+				'id_lici_adj'=>$id_lici_adj,
+				'monto_aprox_adj'=>$monto_aprox_adj,
+				'id_rango'=>$id_rango,
+				'id_sector'=>$id_sector,
+				'otro_comprador'=>$otro_comprador,
+				'id_pais'=>$pais,
+				'id_region'=>$region,
+				'id_via'=>$id_via,
+				'equipos_suministros'=>$equipos_suministros,
+				'descripcion_adj'=>$descripcion_adj,
+				'Razon_social_emp'=>$Razon_social_emp,
+				'username'=>$username,
+				'password_socio'=>$dpassword_socio,
+				'cargo_contacto'=>$cargo_contacto, 
+				'email_contacto'=>$email_contacto,
+				'direccion_contacto'=>$direccion_contacto,
+				'id_socio_adj'=>$id_socio_adj,
+				'fecha_ingreso_adj'=>$fecha_ingreso_adj
+				);
+		
+	
+				
+				 $rc = $this->m_adjudicacion->graba_adjudicacion_socio($data);
+print_r($data );
+				//$this->load->view('View_muro/View_listar_mis_adjudicaciones',$datos);
+			
+			}
+			
 			function listar_mis_adjudicaciones(){
 			    $datos['sectores']                          = $this->session->userdata('SES_sectores');
 				

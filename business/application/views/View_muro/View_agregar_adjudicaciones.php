@@ -65,6 +65,7 @@ function grabar(){
 		var _id_via              =   $("#id_via").val();
 		var _equipos_suministros =   $("#equipos_suministros").val();
 		var _descripcion_adj     =   $("#descripcion_adj").val();
+		var _id_socio_adj        =   $("#descripcion_adj").val();
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 		if(  ! val_campo_js(_nombre_adj,1,0)  ){ alert("Debe indicar  Nombre de Adjudicación, texto muy corto. "); return false }
 		if(  ! val_campo_js(_trim_fecha_adj,0,0) ){ alert("Debe indicar Fecha Adjudicación  "); return false }
@@ -100,10 +101,81 @@ function grabar(){
 		//if(  ! val_campo_js(_descripcion_adj) ){ alert("Debe indicar _descripcion_adj "); return false } 
 	 
 	 
-return true;
-	 
-	 
- }	
+
+
+
+
+     $.ajax
+							  ({
+							    url: ' <?=URL_PM_APP_NEG?>muro/graba_adjudicaciones_usuario/',
+							   data : { 
+
+										nombre_adj         : _nombre_adj,
+										trim_fecha_adj     : _trim_fecha_adj,
+										ano_fecha_adj      : _ano_fecha_adj,
+										id_proy_adj        : _id_proy_adj,
+										inicio_contrato    : _inicio_contrato,
+										duracion_contrato  : _duracion_contrato,
+										id_lici_adj        : _id_lici_adj,
+										monto_aprox_adj    : _monto_aprox_adj,
+										id_rango           : _id_rango,
+										id_sector          : _id_sector,
+										otro_comprador     : _otro_comprador,
+										pais               : _pais,
+										region             : _region,
+										id_via             : _id_via,
+										equipos_suministros: _equipos_suministros,
+										descripcion_adj    : _descripcion_adj,
+										id_socio_adj      : _id_socio_adj
+
+
+							   },
+							   
+							   type : 'post',
+							   cache: false,
+							   
+							   success: function(r3)
+							   {
+								 
+								$("#rmsg").html(r3);
+							   }
+							  
+		}); 
+		
+
+
+
+ }		
+
+
+
+
+
+
+
+
+/*
+
+function guardar_adjudicacion(){
+		jQuery.ajax({
+			url: '<?=base_url();?>muro/graba_adjudicaciones_usuario/',
+			type: "POST",
+			dataType: "jsonp",
+			data: $("#agregar_adj").serialize(),
+			success: function(msg){
+				if(msg.estado=="ok"){
+					alert("Ingresado Correctamente");
+					//location.href="/display/acce/Mis+Adjudicaciones";
+					//evento_click();
+				}else{
+					alert(msg.mensaje);
+					//evento_click();
+				}
+			}
+		});
+	}
+*/
+
 
 
 
@@ -145,6 +217,10 @@ return true;
   padding-left: 40px;">
 	
 	<div  style="background-color: #066293;"><h5 style="color:white;height: 40px;"><br>&nbsp;&nbsp;Datos de la adjudicación</h5></div>
+    
+    <form id="form1" name="agregar_adj" method="agregar_adj" action="">
+    <input type="hidden" name="id_socio_adj" id="id_socio_adj"  value="0"/>
+    
       <div>
       
       <label for="nombre_adj" class="form-label">Nombre Adjudicacion <FONT COLOR="red">&nbsp;(*)</FONT></label>
@@ -324,11 +400,14 @@ return true;
       <FONT COLOR="red">&nbsp;<b>(*)  Los campos marcados son obligatorios</b></FONT><br>
       <br><button onclick="grabar();" type="button" class="btn btn-primary btn-sm">
   Grabar Adjudicación
-</button>
+</button> : <b id="rmsg"></db>
       
       
 	  </div>
-	  	  
+	  
+      </form>
+      
+      	  
 	  </div>
 	  
     </div>
