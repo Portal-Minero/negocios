@@ -1,0 +1,36 @@
+creacion vista en base pm. para las consultas de peoyectos
+***************************************************************
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `vista_buscador_proyecto` AS (
+SELECT
+  `proyectos`.`id_pro`                  AS `id_pro`,
+  `proyectos`.`Nombre_pro`              AS `Nombre_pro`,
+  `proyectos`.`Inversion_pro`           AS `Inversion_pro`,
+  `proyectos`.`Fecha_actualizacion_pro` AS `Fecha_actualizacion_pro`,
+  `proyectos`.`Estado_pro`              AS `Estado_pro`,
+  `proyectos`.`id_man_emp`              AS `id_man_emp`,
+  `proyectos`.`id_region`               AS `id_region`,
+  `proyectos`.`id_pais`                 AS `id_pais`,
+  `proyectos`.`Etapa_actual_pro`        AS `Etapa_actual_pro`,
+  `u_region`.`Nombre_region`            AS `Nombre_region`,
+  `u_pais`.`Nombre_pais`                AS `Nombre_pais`,
+  `proyectos`.`id_sector`               AS `id_sector`
+FROM ((`proyectos`
+    JOIN `u_region`
+      ON ((`proyectos`.`id_region` = `u_region`.`id_region`)))
+   JOIN `u_pais`
+     ON ((`proyectos`.`id_pais` = `u_pais`.`id_pais`)))
+WHERE ((`proyectos`.`id_pagina_pro` > 0)
+       AND (`proyectos`.`Borrar` = 0)))$$
+
+DELIMITER ;
+
+***************************************************************
+
+campos nuevos proyectos:
+`html_cliente`
+`html_date`
+`html_estado`
+
+
+****************************************************************

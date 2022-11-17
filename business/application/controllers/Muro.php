@@ -503,8 +503,8 @@ function __construct()
 						$cargo_contacto         = 	 $row['cargo_socio'];
 						$email_contacto         = 	 $row['email_socio'];
 						$direccion_contacto     = 	 $row['Direccion_emp'];
-						$id_socio_adj           =    $this->session->userdata('SES_id_socio')
-						$id_socio               =    $this->session->userdata('SES_id_socio')
+						$id_socio_adj           =    $this->session->userdata('SES_id_socio');
+						$id_socio               =    $this->session->userdata('SES_id_socio');
 				}
 				
 				
