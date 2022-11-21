@@ -111,7 +111,3 @@ function repone_valor_combo(){
 	
 }
 
-
-
-  
-						  

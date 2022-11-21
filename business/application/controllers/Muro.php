@@ -453,7 +453,7 @@ function __construct()
 			}
 			
 			
-			function manejo_adjudicacion($op=0){
+			function usuario_adjudicacion($op=0){
 				$datos['sectores']                         = $this->session->userdata('SES_sectores');
 				$datos['paises']                           = $this->m_utiles->mostrar_paises();
 				$this->load->view('View_muro/View_agregar_adjudicaciones',$datos);
@@ -491,7 +491,7 @@ function __construct()
 				$direccion_contacto  = "";
 				$id_socio_adj        = "";
 				$fecha_ingreso_adj   = "";	
-				
+				$nombre_completo_socio ="";
 				
 				
 				$rcad = $this->m_adjudicacion->trae_usuarios_socios();
@@ -505,13 +505,14 @@ function __construct()
 						$direccion_contacto     = 	 $row['Direccion_emp'];
 						$id_socio_adj           =    $this->session->userdata('SES_id_socio');
 						$id_socio               =    $this->session->userdata('SES_id_socio');
+						$nombre_completo_socio    = 	 $row['nombre_completo_socio'];
 				}
 				
 				
 				date_default_timezone_set('America/Santiago');
                 //$date = date('m/d/Y h:i:s a', time());
 				
-				$fecha_ingreso_adj =  date('m/d/Y h:i:s a', time());
+				$fecha_ingreso_adj =  date('Y-m-d h:i:s', time());
 				
 				
 				
@@ -555,13 +556,13 @@ function __construct()
 				'id_via'=>$id_via,
 				'equipos_suministros'=>$equipos_suministros,
 				'descripcion_adj'=>$descripcion_adj,
-				'Razon_social_emp'=>$Razon_social_emp,
+				'empresa_contacto'=>$Razon_social_emp,
 				'username'=>$username,
-				'password_socio'=>$dpassword_socio,
 				'cargo_contacto'=>$cargo_contacto, 
 				'email_contacto'=>$email_contacto,
 				'direccion_contacto'=>$direccion_contacto,
 				'id_socio_adj'=>$id_socio_adj,
+				'nombre_contacto'=>$nombre_completo_socio,
 				'fecha_ingreso_adj'=>$fecha_ingreso_adj
 				);
 		

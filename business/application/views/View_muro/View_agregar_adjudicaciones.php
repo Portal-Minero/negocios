@@ -82,7 +82,7 @@ function grabar(){
         if(  ! val_campo_js(_descripcion_adj,1,0) ){ alert("Debe indicar Descripción de la Adjudicación "); return false } 
  
 /*---------------------------------------------------------------------------------------------------------------------------------*/		
-		
+		   
 		
 		
 		//if(  ! val_campo_js(_id_proy_adj) ){ alert("Debe indicar _id_proy_adj "); return false }

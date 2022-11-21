@@ -29,13 +29,14 @@ public function graba_adjudicacion_socio($data){
 								, user_socio.email_socio
 								, empresas.Direccion_emp
 								, user_socio.id_user_socio
+								,nombre_completo_socio
 							FROM
 								portalminero.socio
 								INNER JOIN portalminero.empresas 
 									ON (socio.id_emp = empresas.id_emp)
 								INNER JOIN portalminero.user_socio 
 									ON (user_socio.id_socio = socio.id_socio)
-							WHERE (id_user_socio =)". $this->session->userdata('SES_id_user_socio');
+							WHERE id_user_socio =". $this->session->userdata('SES_id_user_socio');
 									  
 									  $query     = $this->db->query($sql);
 									  $arreglo   = $query->result_array();
