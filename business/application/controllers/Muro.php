@@ -435,7 +435,7 @@ function __construct()
 							
 					
 					echo $list;		
-				   }
+				   } 
 				  
 			    }else{ echo "<br><br><h4 align='center'>No se encontraron considencias, revise criterios de búsqueda.</h4>";}
 			  
@@ -454,10 +454,11 @@ function __construct()
 			
 			
 			function usuario_adjudicacion($op=0){
+				$this->m_utiles->sesionOk();
 				$datos['sectores']                         = $this->session->userdata('SES_sectores');
 				$datos['paises']                           = $this->m_utiles->mostrar_paises();
 				$this->load->view('View_muro/View_agregar_adjudicaciones',$datos);
-				
+				  
 			}
 			
 			
@@ -505,16 +506,13 @@ function __construct()
 						$direccion_contacto     = 	 $row['Direccion_emp'];
 						$id_socio_adj           =    $this->session->userdata('SES_id_socio');
 						$id_socio               =    $this->session->userdata('SES_id_socio');
-						$nombre_completo_socio    = 	 $row['nombre_completo_socio'];
+						$nombre_completo_socio  = 	 $row['nombre_completo_socio'];
 				}
 				
+		
 				
-				date_default_timezone_set('America/Santiago');
-                //$date = date('m/d/Y h:i:s a', time());
-				
-				$fecha_ingreso_adj =  date('Y-m-d h:i:s', time());
-				
-				
+				date_default_timezone_set("America/Santiago");
+	            $fecha_ingreso_adj = date('Y/m/d H:i:s');
 				
 				
 				
@@ -539,7 +537,7 @@ function __construct()
 				
                 				
 				
-				$data = array(
+				$data = array( 
 				'nombre_adj'=>$nombre_adj,
 				'trim_fecha_adj'=>$trim_fecha_adj,
 				'ano_fecha_adj'=>$ano_fecha_adj,
@@ -569,10 +567,16 @@ function __construct()
 	
 				
 				 $rc = $this->m_adjudicacion->graba_adjudicacion_socio($data);
-print_r($data );
-				//$this->load->view('View_muro/View_listar_mis_adjudicaciones',$datos);
+				 if($rc ){
+					 echo "<strong>La información se grabó correctamente.</strong><img src='<?=URL_PM_APP?>imagen/vb2.png' width='40' height='32' align='bottom' />	";
+				 }else{
+					 echo "Ocurrió un error y la información no se grabó correctamente.";
+				 }
+
 			
 			}
+			
+			
 			
 			function listar_mis_adjudicaciones(){
 			    $datos['sectores']                          = $this->session->userdata('SES_sectores');

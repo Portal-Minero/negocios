@@ -34,3 +34,31 @@ campos nuevos proyectos:
 
 
 ****************************************************************
+
+
+
+Codigo para PM
+**************************
+/*epf*/
+	function actualiza_proyecto_html($id,$html_cliente,$html_estado){
+		date_default_timezone_set("America/Santiago");
+	    $html_date = date('Y/m/d H:i:s');
+	   		
+		$data_insert= array();
+		  
+				  $data_update = array(
+                    'html_cliente' => $html_cliente,
+                    'html_estado'  => $html_estado,
+					'html_date'    => $html_date
+                );
+				
+					$this->db->where('id_pro', $id);
+                    $this->db->update('proyectos', $data_update);
+		
+		
+		
+		
+		
+		
+	}
+	

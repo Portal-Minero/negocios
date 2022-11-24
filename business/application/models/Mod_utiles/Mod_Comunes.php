@@ -30,9 +30,19 @@ class Mod_Comunes extends CI_Model{
 	
 
 
-
-
-
+function sesionOk(){
+	if($this->session->userdata('SES_id_socio')==''){
+			   echo "<html>
+				<body><br><br><br><br><br><br><br><br><br><br>
+				<div align='center'>
+				  <h3><a href='".URL_PM_BASE."wp/app/business/'>Ocurrió un error su sesión finalizo, por favor conéctese nuevamente.</a></h3>
+				</div>
+				</body>
+				</html>";
+				die();
+	}
+		
+} 
 
     function actualiza_cliente_html_proyecto($id,$html_cliente,$html_estado){
 		date_default_timezone_set("America/Santiago");

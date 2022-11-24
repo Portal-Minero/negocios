@@ -5,7 +5,7 @@ var C_base_url_imagen ='http://'+window.location.host+'wp/app/app/imagen/';
 function val_campo_js(campo,largo){
 	  
 	  var text=campo;
-	  alert(text);
+	 // alert(text);
 	  
 	 
 	  

@@ -18,7 +18,7 @@
 	  	 
 	  document.getElementById("seleccion").value=p;
 	  document.getElementById("parametro").value=t;
-	  document.form1.submit(); 
+	      document.form1.submit(); 
 	 
   }
   
@@ -48,7 +48,7 @@
 
 function grabar(){
 	 
-	 
+	    $("#rmsg").html(' ');
 		var _nombre_adj          =   $("#nombre_adj").val();
 		var _trim_fecha_adj      =   $("#trim_fecha_adj").val();
 		var _ano_fecha_adj       =   $("#ano_fecha_adj").val();
@@ -67,41 +67,20 @@ function grabar(){
 		var _descripcion_adj     =   $("#descripcion_adj").val();
 		var _id_socio_adj        =   $("#descripcion_adj").val();
 /*---------------------------------------------------------------------------------------------------------------------------------*/
-		if(  ! val_campo_js(_nombre_adj,1,0)  ){ alert("Debe indicar  Nombre de Adjudicación, texto muy corto. "); return false }
-		if(  ! val_campo_js(_trim_fecha_adj,0,0) ){ alert("Debe indicar Fecha Adjudicación  "); return false }
-		if(  ! val_campo_js(_ano_fecha_adj,0,0) ){ alert("Debe indicar Año Adjudicación "); return false }
-		if(  ! val_campo_js(_monto_aprox_adj,0,0) ){ alert("Debe indicar   _monto_aprox_adj "); return false }
-		if(  ! val_campo_js(_id_rango,0,0 ) ){ alert("Debe indicar Rango Monto (USD) "); return false }
-       	if(  ! val_campo_js(_otro_comprador,1,0) ){ alert("Debe indicar _otro_comprador, texto muy corto.  "); return false }
-		if(  ! val_campo_js(_id_sector,0,0) ){ alert("Debe indicar _id_sector "); return false }
-        if(  ! val_campo_js( _pais,0,0)  ){ alert("Debe indicar País "); return false }
-        if(  ! val_campo_js( _region,0,0)  ){ alert("Debe indicar Región "); return false }
-        if(  ! val_campo_js(_id_via,0,0 ) ){ alert("Debe indicar Vía de Adjudicación "); return false }
-		alert(199);
-        if(  ! val_campo_js(_equipos_suministros,1,0) ){ alert("Debe indicar Equipos y suministros "); return false }
-        if(  ! val_campo_js(_descripcion_adj,1,0) ){ alert("Debe indicar Descripción de la Adjudicación "); return false } 
+		if(  ! val_campo_js(_nombre_adj,1,0)  ){ alert("Debe indicar  Nombre de Adjudicación, texto muy corto. "); $( "#nombre_adj" ).focus(); return false }
+		if(  ! val_campo_js(_trim_fecha_adj,0,0) ){ alert("Debe indicar Fecha Adjudicación  ");  $( "#trim_fecha_adj" ).focus(); return false }
+		if(  ! val_campo_js(_ano_fecha_adj,0,0) ){ alert("Debe indicar Año Adjudicación ");  $( "#ano_fecha_adj" ).focus(); return false }
+		if(  ! val_campo_js(_monto_aprox_adj,0,0) ){ alert("Debe indicar   _monto_aprox_adj ");  $( "#monto_aprox_adj" ).focus(); return false }
+		if(  ! val_campo_js(_id_rango,0,0 ) ){ alert("Debe indicar Rango Monto (USD) ");  $( "#id_rango" ).focus(); return false }
+       	if(  ! val_campo_js(_otro_comprador,1,0) ){ alert("Debe indicar _otro_comprador, texto muy corto.  "); $( "#otro_comprador" ).focus(); return false }
+		if(  ! val_campo_js(_id_sector,0,0) ){ alert("Debe indicar _id_sector ");  $( "#id_sector" ).focus(); return false }
+        if(  ! val_campo_js( _pais,0,0)  ){ alert("Debe indicar País ");  $( "#pais" ).focus(); return false }
+        if(  ! val_campo_js( _region,0,0)  ){ alert("Debe indicar Región ");  $( "#region" ).focus(); return false }
+        if(  ! val_campo_js(_id_via,0,0 ) ){ alert("Debe indicar Vía de Adjudicación ");  $( "#id_via" ).focus(); return false }
+		if(  ! val_campo_js(_equipos_suministros,1,0) ){ alert("Debe indicar Equipos y suministros ");  $( "#equipos_suministros" ).focus(); return false }
+        if(  ! val_campo_js(_descripcion_adj,1,0) ){ alert("Debe indicar Descripción de la Adjudicación ");  $( "#descripcion_adj" ).focus(); return false } 
  
 /*---------------------------------------------------------------------------------------------------------------------------------*/		
-		   
-		
-		
-		//if(  ! val_campo_js(_id_proy_adj) ){ alert("Debe indicar _id_proy_adj "); return false }
-		//if(  ! val_campo_js(_inicio_contrato) ){ alert("Debe indicar  _inicio_contrato  "); return false }
-		//if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
-		//if(  ! val_campo_js(_duracion_contrato) ){ alert("Debe indicar  _duracion_contrato  "); return false }
-		//if(  ! val_campo_js(_id_lici_adj) ){ alert("Debe indicar   _id_lici_adj   "); return false }
-		//if(  ! val_campo_js(_monto_aprox_ad) ){ alert("Debe indicar   _monto_aprox_adj "); return false }
-		//if(  ! val_campo_js(_id_rango) ){ alert("Debe indicar _id_rango "); return false }
-		//if(  ! val_campo_js(_id_sector) ){ alert("Debe indicar _id_sector "); return false }
-		//if(  ! val_campo_js(_otro_comprador) ){ alert("Debe indicar _otro_comprador "); return false }
-		//if(  ! val_campo_js(_nombre_adj) ){ alert("Debe indicar nombre_adj "); return false }
-		//if(  ! val_campo_js(_region) ){ alert("Debe indicar _region "); return false }
-		//if(  ! val_campo_js(_id_vi) ){ alert("Debe indicar _id_via "); return false }
-		//if(  ! val_campo_js(_equipos_suministros) ){ alert("Debe indicar _equipos_suministros "); return false }
-		//if(  ! val_campo_js(_descripcion_adj) ){ alert("Debe indicar _descripcion_adj "); return false } 
-	 
-	 
-
 
 
 
@@ -152,35 +131,6 @@ function grabar(){
 
 
 
-
-
-/*
-
-function guardar_adjudicacion(){
-		jQuery.ajax({
-			url: '<?=base_url();?>muro/graba_adjudicaciones_usuario/',
-			type: "POST",
-			dataType: "jsonp",
-			data: $("#agregar_adj").serialize(),
-			success: function(msg){
-				if(msg.estado=="ok"){
-					alert("Ingresado Correctamente");
-					//location.href="/display/acce/Mis+Adjudicaciones";
-					//evento_click();
-				}else{
-					alert(msg.mensaje);
-					//evento_click();
-				}
-			}
-		});
-	}
-*/
-
-
-
-
-
-
 		
  </script>
 
@@ -216,11 +166,11 @@ function guardar_adjudicacion(){
   padding-bottom: 15px;
   padding-left: 40px;">
 	
-	<div  style="background-color: #066293;"><h5 style="color:white;height: 40px;"><br>&nbsp;&nbsp;Datos de la adjudicación</h5></div>
+	<div  style="background-color: #066293;padding:8px;"><h5 style="color:white;height: 60px;"><br>Estimado(a)  <?=$this->session->userdata('SES_nombre_completo_socio');?>, mientras más completa sea la información ingresada, más antecedentes tendrán los mandantes para visualizar su calidad como proveedor.</h5></div>
     
     <form id="form1" name="agregar_adj" method="agregar_adj" action="">
     <input type="hidden" name="id_socio_adj" id="id_socio_adj"  value="0"/>
-    
+    <br>
       <div>
       
       <label for="nombre_adj" class="form-label">Nombre Adjudicacion <FONT COLOR="red">&nbsp;(*)</FONT></label>
@@ -398,16 +348,14 @@ function guardar_adjudicacion(){
 <span class="descripcion_adj"><br><b>Descripción de la Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
   <textarea id="descripcion_adj" class="form-control" aria-label="With textarea"></textarea>  <hr>
       <FONT COLOR="red">&nbsp;<b>(*)  Los campos marcados son obligatorios</b></FONT><br>
-      <br><button onclick="grabar();" type="button" class="btn btn-primary btn-sm">
-  Grabar Adjudicación
-</button> : <b id="rmsg"></db>
+      <br><button onclick="grabar();" type="button" class="btn btn-primary btn-sm">Grabar Adjudicación</button>  <b id="rmsg"></b>
       
       
 	  </div>
 	  
       </form>
       
-      	  
+      	    
 	  </div>
 	  
     </div>
