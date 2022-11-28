@@ -18,13 +18,11 @@
   
  <script>
    function ver_faenas_detalle(faenas,oemp,busca){
-	   alert(0);
+	   
 	   document.getElementById("parame_1").value=faenas;
 	   document.getElementById("parame_2").value=oemp;
 	   document.getElementById("parame_3").value=busca;
-	   alert(faenas);
-	   alert(oemp);
-	   alert(busca);
+	   
 	   
 	   document.detfa.submit(); 
 	   

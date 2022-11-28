@@ -32,11 +32,23 @@ class Mod_Comunes extends CI_Model{
 
 function sesionOk(){
 	if($this->session->userdata('SES_id_socio')==''){
-			   echo "<html>
-				<body><br><br><br><br><br><br><br><br><br><br>
-				<div align='center'>
-				  <h3><a href='".URL_PM_BASE."wp/app/business/'>Ocurrió un error su sesión finalizo, por favor conéctese nuevamente.</a></h3>
-				</div>
+			   echo "<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+				<html xmlns='http://www.w3.org/1999/xhtml'>
+				<head>
+				<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+				<title>Portal Minero</title>
+				</head>
+
+				<body>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p>&nbsp;</p>
+				<p align='center'><img src='https://www.portalminero.com/wp/wp-content/uploads/2018/08/portalminero-logo.png' /></p>
+				<h1 align='center'>Aviso Del Sistema !!</h1>
+				<p align='center'>
+				<h3 align='center'><a href='".URL_PM_BASE."wp/app/business/'>Su sesión ha finalizado por favor vuelva a conectarse al sistema.</a></h3></p>
+				<p>&nbsp;</p>
 				</body>
 				</html>";
 				die();

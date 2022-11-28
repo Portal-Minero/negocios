@@ -90,15 +90,7 @@ function __construct()
 			public function inicio()
 			{
 				
-				if(   $this->session->userdata('SES_id_socio') =="" ) {
-					
-					echo "<p>No Hay Sesión debe ingresar nuevamente</p>";
-					echo "<p><a href='http://200.6.115.193/wp/app/business/'>Inicio Sistema</a></p>";
-					exit;
-					
-				}
-				
-				         			 
+				 $this->m_utiles->sesionOk();
 				
 				 $datos=array();
 				 
@@ -357,7 +349,7 @@ function __construct()
 			 
 			function equipos_mineria(){
 				$datos['sectores']                               = $this->session->userdata('SES_sectores');
-				$this->load->view('View_muro/View_ equipos_mineria',$datos);
+				$this->load->view('View_muro/View_equipos_mineria',$datos);
             }
 			
 			
@@ -461,6 +453,15 @@ function __construct()
 				  
 			}
 			
+		    function modifica_adjudicacion_socio($id_socio_adj=0){
+			
+			    $this->m_utiles->sesionOk();
+				$datos['sectores']                         = $this->session->userdata('SES_sectores');
+				$datos['paises']                           = $this->m_utiles->mostrar_paises();
+				$datos['adjudicacion_socio']               = $this->m_adjudicacion->ver_adjudicacion_socio($id_socio_adj);
+				$this->load->view('View_muro/View_modifica_adjudicaciones',$datos);
+			}
+			
 			
 			function graba_adjudicaciones_usuario(){
 				$data =array();
@@ -561,14 +562,15 @@ function __construct()
 				'direccion_contacto'=>$direccion_contacto,
 				'id_socio_adj'=>$id_socio_adj,
 				'nombre_contacto'=>$nombre_completo_socio,
-				'fecha_ingreso_adj'=>$fecha_ingreso_adj
+				'fecha_ingreso_adj'=>$fecha_ingreso_adj,
+				'id_socio'=>$id_socio
 				);
 		
 	
 				
 				 $rc = $this->m_adjudicacion->graba_adjudicacion_socio($data);
 				 if($rc ){
-					 echo "<strong>La información se grabó correctamente.</strong><img src='<?=URL_PM_APP?>imagen/vb2.png' width='40' height='32' align='bottom' />	";
+					 echo "<strong>La información se grabó correctamente.</strong><img src='".URL_PM_APP."imagen/vb2.png' width='40' height='32' align='bottom' />	";
 				 }else{
 					 echo "Ocurrió un error y la información no se grabó correctamente.";
 				 }
@@ -576,14 +578,43 @@ function __construct()
 			
 			}
 			
+			/*function mostrar_usuario_adjudicacion($id){
+				 $datos['sectores']                  = $this->session->userdata('SES_sectores');
+				 $this->load->view('View_muro/View_listar_mis_adjudicaciones',$datos);
+			}*/
 			
-			
-			function listar_mis_adjudicaciones(){
+			function listar_mis_adjudicaciones($order=0,$tipo_orden=0){
+				$this->m_utiles->sesionOk();
+				$_tipo_orden="";
+				$_order="";
+				
+				if($order==0){$_order ='fecha_ingreso_adj';}
+				if($order==1){$_order ='fecha_ingreso_adj';}
+				if($order==2){$_order ='fecha_ingreso_adj';}
+				
+				if($tipo_orden==0){$_tipo_orden ='DESC';}
+				if($tipo_orden==1){$_tipo_orden ='ASC';}
+				
 			    $datos['sectores']                          = $this->session->userdata('SES_sectores');
+				$datos['paises']                            = $this->m_utiles->mostrar_paises();
+				$id_socio                                   = $this->session->userdata('SES_id_socio');
+				
+				
+				$datos['adj_socio']   = $this->m_adjudicacion->lista_adjudicacion_socio($id_socio,$_order,$_tipo_orden);
+				
 				
 				$this->load->view('View_muro/View_listar_mis_adjudicaciones',$datos);
 			
 			}
+			
+			function ver_adjudicacion_socio($id_socio_adj=0){
+				$this->m_utiles->sesionOk();
+				$datos['sectores']                     = $this->session->userdata('SES_sectores');
+				$datos['adjudicacion_socio']           = $this->m_adjudicacion->ver_adjudicacion_socio($id_socio_adj);
+				$this->load->view('View_muro/View_ver_adjudicacion_socio',$datos);
+			}
+			
+			
 			
 			
 			function companias_mineras($pais=81){

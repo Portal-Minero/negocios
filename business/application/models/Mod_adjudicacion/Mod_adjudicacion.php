@@ -23,7 +23,7 @@ public function graba_adjudicacion_socio($data){
 	
 	function trae_usuarios_socios(){
 
-					//$sql = "SELECT * FROM Areas a WHERE a.Idf = '4' AND id IN ($ids) GROUP BY a.Id ORDER BY a.Nombre ASC";
+					
 					$sql = "SELECT
 								socio.id_socio
 								, empresas.Razon_social_emp
@@ -48,8 +48,93 @@ public function graba_adjudicacion_socio($data){
 							  
 	}
 			
-	
 
+
+
+function ver_adjudicacion_socio($id_socio_adj=0){
+
+					
+					$sql = "SELECT
+					socio_adjudicaciones.*
+					, u_region.Nombre_region
+					, u_pais.Nombre_pais
+					, adjudicacion_rango.Nombre_rango
+					, adjudicacion_via.Nombre_via
+					, proyectos_sector.Nombre_sector
+					, trimestre.nombre as tri_nombre
+				FROM
+					portalminero.u_region
+					INNER JOIN portalminero.u_pais 
+						ON (u_region.id_pais = u_pais.id_pais)
+					INNER JOIN portalminero.socio_adjudicaciones 
+						ON (socio_adjudicaciones.id_region = u_region.id_region)
+					INNER JOIN portalminero.adjudicacion_rango 
+						ON (socio_adjudicaciones.id_rango = adjudicacion_rango.id_rango)
+					INNER JOIN portalminero.adjudicacion_via 
+						ON (socio_adjudicaciones.id_via = adjudicacion_via.id_via)
+					INNER JOIN portalminero.proyectos_sector 
+						ON (socio_adjudicaciones.id_sector = proyectos_sector.id_sector)
+					INNER JOIN portalminero.trimestre 
+						ON (socio_adjudicaciones.trim_fecha_adj = trimestre.num)
+				WHERE (socio_adjudicaciones.id_socio_adj = ".$id_socio_adj.");";
+									
+							  
+					$query     = $this->db->query($sql);
+					$arreglo   = $query->result_array();
+					return ($arreglo);
+							  
+	}
+
+
+	
+function lista_adjudicacion_socio($id_socio=0,$order="",$tipo_orden=""){
+
+					
+					$sql = "SELECT
+					  id_socio_adj,
+					  id_sector,
+					  tipo_adj,
+					  trim_fecha_adj,
+					  ano_fecha_adj,
+					  nombre_adj,
+					  descripcion_adj,
+					  monto_aprox_adj,
+					  id_proy_adj,
+					  id_lici_adj,
+					  emp_adj,
+					  emp_compra_adj,
+					  fecha_ingreso_adj,
+					  id_socio,
+					  estado,
+					  id_adj,
+					  id_via,
+					  id_pais,
+					  id_region,
+					  id_comuna,
+					  id_rango,
+					  duracion_contrato,
+					  inicio_contrato,
+					  otro_comprador,
+					  otra_emp_adjudicada,
+					  equipos_suministros,
+					  username,
+					  nombre_contacto,
+					  empresa_contacto,
+					  cargo_contacto,
+					  email_contacto,
+					  telefono_contacto,
+					  direccion_contacto,
+					  otros_contacto,
+					  id_cambio
+					FROM portalminero.socio_adjudicaciones
+					WHERE id_socio = ".$id_socio."  ORDER BY ".$order."  ".$tipo_orden;
+					
+							  
+					$query     = $this->db->query($sql);
+					$arreglo   = $query->result_array();
+					return ($arreglo);
+							  
+	}
 
 public function trae_clientes_rys(){
 		

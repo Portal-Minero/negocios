@@ -4,6 +4,7 @@
  $pagina_menu = URL_PM_APP_NEG."muro/buscador_proyectos/";
  
  
+
 ?>
 <!DOCTYPE html>
 <html lang="en">  
@@ -26,6 +27,20 @@
 	  document.form1.submit(); 
 	 
   }
+  
+  function busca(id){
+	  
+	  var  link ="<?=URL_PM_APP_NEG;?>muro/ver_adjudicacion_socio/"+id+"/";
+	  window.location.href = link;
+  }
+  
+  function modifica(id){
+	  
+	  var  link ="<?=URL_PM_APP_NEG;?>muro/modifica_adjudicacion_socio/"+id+"/";
+	  window.location.href = link;
+  }
+  
+  
   </script>
   
 </head>
@@ -68,35 +83,36 @@
 			<table class="table">
 			  <thead class="thead-light">
 				<tr>
-				  <th scope="col">Nombre</th>
-				  <th scope="col">Comprador</th>
-				  <th scope="col">Fecha de Adjudicación</th>
+				  <th scope="col">Nombre&nbsp;<a href="#" onclick="ordena();"><i class="fas fa-sort"></i></a></th>
+				  <th scope="col">Comprador&nbsp;<a href="#" onclick="ordena();"><i class="fas fa-sort"></i></a></th>
+				  <th scope="col">Fecha de Adjudicación&nbsp;<a href="#" onclick="ordena();"><i class="fas fa-sort"></i></a></th>
 				  <th scope="col">Ver</th>
-				  <th scope="col">Fecha Ingreso</th>
+				  <th scope="col">Fecha Ingreso&nbsp;<a href="#" onclick="ordena();"><i class="fas fa-sort fa-lg"></i></a></th>
 				</tr>
 			  </thead>
 			  <tbody>
+				 <? foreach ($adj_socio as $row) { 
+				 if($row['estado']=='Pendiente'){
+				  $trim_fecha_adj="";
+				  if($row['trim_fecha_adj']==1){  $trim_fecha_adj =   "1° Trimestre";}
+				  if($row['trim_fecha_adj']==2){  $trim_fecha_adj =   "2° Trimestre";}
+				  if($row['trim_fecha_adj']==3){  $trim_fecha_adj =   "3° Trimestre";}
+				  if($row['trim_fecha_adj']==4){  $trim_fecha_adj =   "4° Trimestre";}
+	
+				 
+				 
+				 
+				 
+				 ?>
 				<tr>
-				  <th scope="row">1</th>
-				  <td>Mark</td>
-				  <td>Otto</td>
-				  <td>@mdo</td>
-				   <td>@mdo</td>
+				  <th scope="row"><?= $row['nombre_adj'];?></th>
+				  <td><?= $row['otro_comprador'];?></td>
+				  <td><?= $trim_fecha_adj;?> <?= $row['ano_fecha_adj'];?></td>
+				  <td ><div align="center"><a href="#" onclick="busca(<?= $row['id_socio_adj'];?>);"><i class="fas fa-eye  fa-lg"></i></a></div></td>
+				  <td><?= $row['fecha_ingreso_adj'];?></td>
 				</tr>
-				<tr>
-				  <th scope="row">2</th>
-				  <td>Jacob</td>
-				  <td>Thornton</td>
-				  <td>@fat</td>
-				   <td>@mdo</td>
-				</tr>
-				<tr>
-				  <th scope="row">3</th>
-				  <td>Larry</td>
-				  <td>the Bird</td>
-				  <td>@twitter</td>
-				   <td>@mdo</td>
-				</tr>
+			  <? }} ?>	
+				
 			  </tbody>
 			</table>
 </div>
@@ -124,35 +140,37 @@
 			<table class="table">
 			  <thead class="thead-light">
 				<tr>
-				  <th scope="col">Nombre</th>
-				  <th scope="col">Comprador</th>
-				  <th scope="col">Fecha de Adjudicación</th>
-				  <th scope="col">Ver</th>
-				   <th scope="col">Informar Cambios</th>
+				  <th scope="col">Nombre&nbsp;<a href="#" onclick="ordena();"><i class="fas fa-sort"></i></th>
+				  <th scope="col">Comprador&nbsp;<a href="#" onclick="ordena();"><i class="fas fa-sort"></i></th>
+				  <th scope="col">Fecha de Adjudicación&nbsp;<a href="#" onclick="ordena();"><i class="fas fa-sort"></i></th>
+				  <th scope="col"><div align="center">Ver</div></th>
+				   <th scope="col" ><div align="center">Informar Cambios</div></th>
 				</tr>
 			  </thead>
 			  <tbody>
+			  
+			   <? foreach ($adj_socio as $row) { 
+				 if($row['estado']=='Completada'){
+				  $trim_fecha_adj="";
+				  if($row['trim_fecha_adj']==1){  $trim_fecha_adj =   "1° Trimestre";}
+				  if($row['trim_fecha_adj']==2){  $trim_fecha_adj =   "2° Trimestre";}
+				  if($row['trim_fecha_adj']==3){  $trim_fecha_adj =   "3° Trimestre";}
+				  if($row['trim_fecha_adj']==4){  $trim_fecha_adj =   "4° Trimestre";}
+	
+				 
+				 
+				 
+				 
+				 ?>
+				 
 				<tr>
-				  <th scope="row">1</th>
-				  <td>Mark</td>
-				  <td>Otto</td>
-				  <td>@mdo</td>
-				  <td>@mdo</td>
+				  <th scope="row"><?= $row['nombre_adj'];?></th>
+				  <td><?= $row['otro_comprador'];?></td>
+				  <td><?= $trim_fecha_adj;?> <?= $row['ano_fecha_adj'];?></td>
+				  <td ><div align="center"><a href="#" onclick="busca(<?= $row['id_socio_adj'];?>);"><i class="fas fa-eye  fa-lg"></i></a></div></td>
+				  <td ><div align="center"><a href="#" onclick="modifica(<?= $row['id_socio_adj'];?>);"><i class="fa-regular fa-paper-plane fa-lg"></i></a></div></td>
 				</tr>
-				<tr>
-				  <th scope="row">2</th>
-				  <td>Jacob</td>
-				  <td>Thornton</td>
-				  <td>@fat</td>
-				  <td>@mdo</td>
-				</tr>
-				<tr>
-				  <th scope="row">3</th>
-				  <td>Larry</td>
-				  <td>the Bird</td>
-				  <td>@twitter</td>
-				  <td>@mdo</td>
-				</tr>
+				 <? }} ?>	
 			  </tbody>
 			</table>
 </div>
