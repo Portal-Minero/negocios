@@ -3,7 +3,6 @@
  $this->load->helper('url');
  $pagina_menu = URL_PM_APP_NEG."muro/buscador_proyectos/";
  
- 
 ?>
 
 
@@ -65,7 +64,7 @@ function grabar(){
 		var _id_via              =   $("#id_via").val();
 		var _equipos_suministros =   $("#equipos_suministros").val();
 		var _descripcion_adj     =   $("#descripcion_adj").val();
-		var _id_socio_adj        =   $("#descripcion_adj").val();
+		var _id_socio_adj        =   0;
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 		if(  ! val_campo_js(_nombre_adj,1,0)  ){ alert("Debe indicar  Nombre de Adjudicación, texto muy corto. "); $( "#nombre_adj" ).focus(); return false }
 		if(  ! val_campo_js(_trim_fecha_adj,0,0) ){ alert("Debe indicar Fecha Adjudicación  ");  $( "#trim_fecha_adj" ).focus(); return false }
@@ -91,6 +90,7 @@ function grabar(){
 
 										nombre_adj         : _nombre_adj,
 										trim_fecha_adj     : _trim_fecha_adj,
+										trim_fecha_adj     : _trim_fecha_adj,
 										ano_fecha_adj      : _ano_fecha_adj,
 										id_proy_adj        : _id_proy_adj,
 										inicio_contrato    : _inicio_contrato,
@@ -105,7 +105,7 @@ function grabar(){
 										id_via             : _id_via,
 										equipos_suministros: _equipos_suministros,
 										descripcion_adj    : _descripcion_adj,
-										id_socio_adj      : _id_socio_adj
+										id_socio_adj       : <?=$id_socio_adj;?>
 
 
 							   },
@@ -167,7 +167,7 @@ function grabar(){
 	 $date = date_create($rowmod['inicio_contrato']);
 
     $fechita =  date_format($date,"Y-m-d");
-	 echo $fechita;
+	
 	 ?>
 	 
 	 
@@ -242,6 +242,8 @@ function grabar(){
 			   
 				
 				<option value="">- Seleccione Rango (USD) -</option>
+				<option value="<?=$rowmod['id_rango'];?>" selected="selected"><?=$rowmod['Nombre_rango'];?></option>
+				
 																					<option value="1">0 a 10.000</option>
 																					<option value="2">10.001 a 20.000</option>
 																					<option value="54">20.001 a 30.000</option>
@@ -300,7 +302,7 @@ function grabar(){
 	  <label for="id_sector" class="form-label">Sector Comprador<FONT COLOR="red">&nbsp;(*)</FONT></label>
 			<select  style="width: 100%px" class="combobox form-control" name="id_sector" id="id_sector">
 			   
-				
+				<option value="<?=$rowmod['id_sector'];?>"  selected="selected"><?=$rowmod['Nombre_sector'];?></option>
 				
 																					<option value="">- Sector -</option>
 																						<option value="2">Energía</option>
@@ -318,11 +320,11 @@ function grabar(){
 	<tr>
       <th scope="row">4</th>
       <td><label for="otro_comprador" class="form-label">Comprador<FONT COLOR="red">&nbsp;(*)</FONT></label>
-				<input type="text" id="otro_comprador" class="form-control" aria-describedby="passwordHelpBlock"></td>
+				<input value="<?=$rowmod['otro_comprador'];?>" type="text" id="otro_comprador" class="form-control" aria-describedby="passwordHelpBlock"></td>
       <td><label for="pais" class="form-label">Pais<FONT COLOR="red">&nbsp;(*)</FONT></label>
 			<select  style="width: 100%px" class="combobox form-control" name="pais" id="pais" onchange="trae_region();">
            <option value="">- Seleccione Pais -</option>
-			<option value="81">Chile</option>
+			<option value="<?=$rowmod['id_pais'];?>" selected="selected" ><?=$rowmod['Nombre_pais'];?></option>
 			   <? foreach ($paises as $row)  {?>
 				<option value="<? echo $row['id_pais']; ?>"><? echo $row['Nombre_pais']; ?></option>
 				 <? } ?>
@@ -332,7 +334,7 @@ function grabar(){
       <td><label for="region" class="form-label">Región<FONT COLOR="red">&nbsp;(*)</FONT></label>
 			<select  style="width: 100%px" class="combobox form-control" name="region" id="region">
 			   
-				
+				<option value="<?=$rowmod['id_region'];?>" selected="selected" ><?=$rowmod['Nombre_region'];?></option>
 				<option value="">- Seleccione Región -</option>
 				
 				
@@ -347,7 +349,7 @@ function grabar(){
 <label for="id_via" class="form-label">Vía de Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></label>
 			<select  style="width: 100%px" class="combobox form-control" name="id_via" id="id_via">
 			   
-				
+				<option value="<?=$rowmod['id_via'];?>" selected="selected" ><?=$rowmod['Nombre_via'];?></option>
 				<option value="">- Seleccione Vía de Adjudicación -</option>
 																					<option value="1">Licitación Abierta</option>
 																					<option value="2">Licitación Cerrada</option>
@@ -356,10 +358,10 @@ function grabar(){
 				
 			</select>
  <span class="equipos_suministros"><br><b>Equipos, Suministros y/o Servicios Adjudicados<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
-  <textarea id="equipos_suministros" class="form-control" aria-label="With textarea"></textarea>   
+  <textarea id="equipos_suministros" class="form-control" aria-label="With textarea"><?=htmlentities($rowmod['equipos_suministros']);?></textarea>   
 
 <span class="descripcion_adj"><br><b>Descripción de la Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
-  <textarea id="descripcion_adj" class="form-control" aria-label="With textarea"></textarea>  <hr>
+  <textarea id="descripcion_adj" class="form-control" aria-label="With textarea"><?=$rowmod['descripcion_adj'];?></textarea>  <hr>
       <FONT COLOR="red">&nbsp;<b>(*)  Los campos marcados son obligatorios</b></FONT><br>
       <br><button onclick="grabar();" type="button" class="btn btn-primary btn-sm">Enviar Cambios</button>  <b id="rmsg"></b>
       

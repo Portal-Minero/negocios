@@ -245,14 +245,24 @@ var printContents = document.getElementById('accordion').innerHTML;
 
 <!-- Inicio Tabla Buscador -->
 
-
- 
   <div class="panel-group" id="accordion">
   
     <div class="panel panel-default">
+			  <?
+
+		if($tiene_rca > 0 ){ ?>
+			
+			          <DIV style="position: absolute; left: 380px; top: 200px; z-index: 1;">
+						 <img src='https://pm.portalminero.com/images/evahamb.png' width='120' />
+					   </DIV>
+		<? }
+	
+	
+?>
       <div class="panel-heading">
         <h4 class="panel-title">
           <a onclick="oculta_gantt();" data-toggle="collapse" data-parent="#accordion" href="#collapse1">Información Básica</a>
+
         </h4>
       </div>
       <div id="collapse1" class="panel-collapse collapse in">

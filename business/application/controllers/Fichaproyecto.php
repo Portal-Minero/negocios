@@ -10,6 +10,7 @@ function __construct()
 				$this ->load->model ('Mod_proyecto/Mod_general/Mod_general','general');
 				$this ->load->model ('Mod_proyecto/Mod_buscador/Mod_buscador','m_buscador');
 				$this ->load->model ('Mod_proyecto/Mod_Ficha/Mod_FichaProyecto','m_Mod_FichaProyecto');
+				$this ->load->model ('Mod_utiles/Mod_Comunes','m_utiles');
 				
 				
 			}
@@ -39,8 +40,8 @@ function __construct()
 				 $datos['datos_general']            = $this->m_Mod_FichaProyecto->editar_proyecto($id_pro);
 				 
 				 
-				 $datos['get_etapas_proyecto']            = $this->m_Mod_FichaProyecto->get_etapas_proyecto($id_pro);
-				 $datos['get_hitos_importantes']            = $this->m_Mod_FichaProyecto->get_hitos_importantes($id_pro);
+				 $datos['get_etapas_proyecto']      = $this->m_Mod_FichaProyecto->get_etapas_proyecto($id_pro);
+				 $datos['get_hitos_importantes']    = $this->m_Mod_FichaProyecto->get_hitos_importantes($id_pro);
 				 
 				  
 				 $datos['datos_contactos']          = $this->m_Mod_FichaProyecto->buscar_contactos_pro($id_pro,1);
@@ -55,14 +56,16 @@ function __construct()
 				 $datos['get_servicios_pr']         = $this->m_Mod_FichaProyecto->get_servicios_proyecto($id_pro);
 				 $datos['get_barra_grafico_proyectos']  = $this->m_Mod_FichaProyecto->get_barra_grafico_proyectos($sector);
 				 $datos['get_barra_grafico_proyectos_sectores']  = $this->m_Mod_FichaProyecto->get_barra_grafico_proyectos_sectores();
-				 $datos['get_adjudicaciones_asociadas']         = $this->m_Mod_FichaProyecto->get_adjudicaciones_asociadas($id_pro);
+				 $datos['get_adjudicaciones_asociadas']            = $this->m_Mod_FichaProyecto->get_adjudicaciones_asociadas($id_pro);
 				
 				 $datos['get_licitaciones_detalle']                = $this->m_Mod_FichaProyecto->get_licitaciones_detalle($id_pro);
 				 
 				 
-				 $datos['sector_elegido']               = $sector;
+				 $datos['sector_elegido']                           = $sector;
 				  
+				 $datos['tiene_rca']  = $this->m_utiles->tiene_rca($id_pro);
 				  
+				 
 				  
 				 // $rc=array();
 				 // print_r($this->m_Mod_FichaProyecto->get_servicios_proyecto($id_pro));
@@ -77,10 +80,11 @@ function __construct()
 				   
 			
 		       // } 
-				  
-				  
-				  
-				  
+			   
+				  $nombre_pro = $this->m_utiles->trae_un_dato("SELECT Nombre_pro AS dato FROM proyectos WHERE id_pro = ".$id_pro);
+				  $SES_id_user_socio = $this->session->userdata('SES_id_user_socio');
+				  $this->m_utiles->actividad_usuario($nombre_pro, $id_pro,"P",$SES_id_user_socio);
+				 
 				  
 				  
 				  

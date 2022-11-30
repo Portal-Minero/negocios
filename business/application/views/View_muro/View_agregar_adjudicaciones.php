@@ -65,7 +65,7 @@ function grabar(){
 		var _id_via              =   $("#id_via").val();
 		var _equipos_suministros =   $("#equipos_suministros").val();
 		var _descripcion_adj     =   $("#descripcion_adj").val();
-		var _id_socio_adj        =   $("#descripcion_adj").val();
+		var _id_socio_adj        =   0;
 /*---------------------------------------------------------------------------------------------------------------------------------*/
 		if(  ! val_campo_js(_nombre_adj,1,0)  ){ alert("Debe indicar  Nombre de Adjudicación, texto muy corto. "); $( "#nombre_adj" ).focus(); return false }
 		if(  ! val_campo_js(_trim_fecha_adj,0,0) ){ alert("Debe indicar Fecha Adjudicación  ");  $( "#trim_fecha_adj" ).focus(); return false }
@@ -348,7 +348,7 @@ function grabar(){
 <span class="descripcion_adj"><br><b>Descripción de la Adjudicación<FONT COLOR="red">&nbsp;(*)</FONT></b></span>
   <textarea id="descripcion_adj" class="form-control" aria-label="With textarea"></textarea>  <hr>
       <FONT COLOR="red">&nbsp;<b>(*)  Los campos marcados son obligatorios</b></FONT><br>
-      <br><button onclick="grabar();" type="button" class="btn btn-primary btn-sm">Grabar Adjudicación</button>  <b id="rmsg"></b>
+      <br><button onclick="grabar();" type="button" class="btn btn-primary btn-sm">Enviar Adjudicación</button>  <b id="rmsg"></b>
       
       
 	  </div>

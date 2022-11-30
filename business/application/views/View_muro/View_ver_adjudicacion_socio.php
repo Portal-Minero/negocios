@@ -129,11 +129,16 @@
 </table>
 
 <label for="id_via" class="form-label">Vía de Adjudicación</label>
-			<p><b><FONT COLOR="#066293"><ul>
+			<p><b>&nbsp;&nbsp;<FONT COLOR="#066293"><ul>
   <li><?=$row['Nombre_via'];?></li>
 </ul></FONT></b></p>
  <span class="equipos_suministros"><b>Equipos, Suministros y/o Servicios Adjudicados</b></span>
-  <p><b><FONT COLOR="#066293"><p><b><FONT COLOR="#066293"><?=htmlentities($row['equipos_suministros']);?></FONT></b></p></FONT></b></p>  
+  <p><b><FONT COLOR="#066293"><p><b><FONT COLOR="#066293"><? echo nl2br(htmlentities($row['equipos_suministros']));?></FONT></b></p></FONT></b></p>  
+
+
+
+
+
 
 <span class="descripcion_adj"><b>Descripción de la Adjudicación</b></span>
   <br><p><b><FONT COLOR="#066293"><?=$row['descripcion_adj'];?></FONT></b></p>  <hr>

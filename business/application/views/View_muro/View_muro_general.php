@@ -124,8 +124,9 @@
                 foreach ($recientemente_actualizado_proyectos as $row)
 				  {
 					  $date = date_create($row['Fecha_actualizacion_pro']);
-				      echo "<li><a href='#' target='_parent'>".$row['Nombre_pro']."&nbsp;&nbsp;actualizado el&nbsp;&nbsp;".date_format( $date,"d/m/Y" )."</a></li>"; 
-				      
+				      echo "<li><a href='".URL_PM_APP_NEG."Fichaproyecto/ficha_proyectos/".$row['id_pro']."/1/0/' target='_parent'>".$row['Nombre_pro']."&nbsp;&nbsp;actualizado el&nbsp;&nbsp;".date_format( $date,"d/m/Y" )."</a></li>"; 
+					  
+					 
 				     
 				  }
 
@@ -149,7 +150,7 @@
 		  </ul>
 	  </div>
 	  
-		   
+		    
 		  
 		  
 	  </div>
@@ -158,8 +159,15 @@
     <div class="col-sm-3">
       <div style="font-size: 11px;padding: 5px;">
           <p><b>Su historial más reciente</b></p>
-		  
-          <p>No hay Páginas por el momento.</p>
+		  <ul>
+		  <?
+                foreach ($actividad_usuario as $rowac){
+				  echo "<li><a href='".URL_PM_APP_NEG."Fichaproyecto/ficha_proyectos/".$rowac['id_registro']."/1/0/'>".$rowac['texto']."</a></li>";
+				}  
+				  
+		   ?>
+				  
+          </ul>
 		  <hr>
           
 	  </div>

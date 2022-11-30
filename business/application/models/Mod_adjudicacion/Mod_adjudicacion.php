@@ -8,12 +8,19 @@ class Mod_adjudicacion extends CI_Model{
 	
 
 
-public function graba_adjudicacion_socio($data){
-		
-		 $this->db->insert('socio_adjudicaciones',$data);
-		 $this->db->close();
-         return (true);
-		 
+public function graba_adjudicacion_socio($data,$id_socio_adj=0){
+		 if($id_socio_adj>0){
+			 $this->db->where('id_socio_adj', $id_socio_adj);
+             $this->db->update('socio_adjudicaciones', $data);
+	        
+			 return (true);
+
+		}else{
+			 $this->db->insert('socio_adjudicaciones',$data);
+			  
+			 $this->db->close();
+			 return (true);
+		 }
 		 
 		 
 }	
@@ -58,9 +65,14 @@ function ver_adjudicacion_socio($id_socio_adj=0){
 					socio_adjudicaciones.*
 					, u_region.Nombre_region
 					, u_pais.Nombre_pais
+					, u_pais.id_pais
+					, u_region.id_region
+					, adjudicacion_rango.id_rango
 					, adjudicacion_rango.Nombre_rango
 					, adjudicacion_via.Nombre_via
+					, adjudicacion_via.id_via
 					, proyectos_sector.Nombre_sector
+					, proyectos_sector.id_sector
 					, trimestre.nombre as tri_nombre
 				FROM
 					portalminero.u_region
@@ -78,7 +90,7 @@ function ver_adjudicacion_socio($id_socio_adj=0){
 						ON (socio_adjudicaciones.trim_fecha_adj = trimestre.num)
 				WHERE (socio_adjudicaciones.id_socio_adj = ".$id_socio_adj.");";
 									
-							  
+						
 					$query     = $this->db->query($sql);
 					$arreglo   = $query->result_array();
 					return ($arreglo);
@@ -187,6 +199,11 @@ public function trae_clientes_rys(){
 	 }
 
 
+
+
+
+	
+	
 	
 } // fin
 

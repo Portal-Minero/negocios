@@ -125,6 +125,7 @@ function __construct()
 			    $datos['nombre_vendedor']                        = $datos_vendedor->Nombre_completo_user;
 			    $datos['recientemente_actualizado_proyectos']    = $this->muro->recientemente_actualizado_proyectos(1);
 				$datos['recientemente_actualizado_licitaciones'] = $this->muro->recientemente_actualizado_licitaciones(1);
+				$datos['actividad_usuario']                      = $this->m_utiles->mostrar_actividad_usuario();
 				
 				// pantalla inicial del cliente 
 				 $this->load->view('View_muro/View_muro_general',$datos);
@@ -458,6 +459,7 @@ function __construct()
 			    $this->m_utiles->sesionOk();
 				$datos['sectores']                         = $this->session->userdata('SES_sectores');
 				$datos['paises']                           = $this->m_utiles->mostrar_paises();
+				$datos['id_socio_adj']                     = $id_socio_adj;
 				$datos['adjudicacion_socio']               = $this->m_adjudicacion->ver_adjudicacion_socio($id_socio_adj);
 				$this->load->view('View_muro/View_modifica_adjudicaciones',$datos);
 			}
@@ -482,7 +484,7 @@ function __construct()
 				$id_via              ="";
 				$equipos_suministros ="";
 				$descripcion_adj     ="";
-				$id_socio_adj        ="";
+				$id_socio_adj        = 0;
 				$pais                ="";
 				
 				$Razon_social_emp    = "";
@@ -568,9 +570,10 @@ function __construct()
 		
 	
 				
-				 $rc = $this->m_adjudicacion->graba_adjudicacion_socio($data);
+				 $rc = $this->m_adjudicacion->graba_adjudicacion_socio($data,$id_socio_adj);
 				 if($rc ){
-					 echo "<strong>La información se grabó correctamente.</strong><img src='".URL_PM_APP."imagen/vb2.png' width='40' height='32' align='bottom' />	";
+					 echo "<strong>La información se grabó correctamente y fue enviada</strong><img src='".URL_PM_APP."imagen/vb2.png' width='40' height='32' align='bottom' />	";
+					 $this->m_utiles->mail_usuario_adjudicacion(19);
 				 }else{
 					 echo "Ocurrió un error y la información no se grabó correctamente.";
 				 }
