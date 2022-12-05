@@ -34,8 +34,7 @@
   <br><br>
 <div class="container">
 		
-		
-		
+	
 		
 
 <div id="informacion_cliente_muro"  style ="padding-top: 30px;

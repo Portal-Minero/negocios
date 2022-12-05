@@ -196,7 +196,7 @@ function carga_proyectos_nombre($sector,$inicio,$fin,$nombre=0,$orden=0,$desc__a
 		  if($sector==0){
 			 
 			   $sql = "SELECT id_pro,TRIM(Nombre_pro) AS tNombre_pro,Inversion_pro,Nombre_pais,Nombre_pais,Fecha_actualizacion_pro,Nombre_region FROM vista_buscador_proyecto WHERE  id_sector IN (".$this->todos_los_sectores($sector).")  and Nombre_pro like '%".$nombre."%' ORDER BY   ".$order_by."  LIMIT ".$inicio.", ".$fin.";";
-			   echo $sql;
+			   //echo $sql;
 		
                $cuenta_linea= "SELECT count(*) as total FROM vista_buscador_proyecto WHERE   id_sector IN (".$this->todos_los_sectores($sector).")  and Nombre_pro like '%".$nombre."%' ";
 
@@ -400,6 +400,13 @@ function paginador($total_query=0,$traidos_por_pagina=0,$por_nom=0,$orden=0){
 		
 		
 	}
+	
+	function paginador2($total_query=0,$traidos_por_pagina=0,$por_nom=0,$orden=0){
+	
+	
+	}
+	
+	
 	function m_carga_proyectos_pagina($sector,$inicio,$fin){
 		
 		

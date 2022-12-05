@@ -573,7 +573,7 @@ function __construct()
 				 $rc = $this->m_adjudicacion->graba_adjudicacion_socio($data,$id_socio_adj);
 				 if($rc ){
 					 echo "<strong>La información se grabó correctamente y fue enviada</strong><img src='".URL_PM_APP."imagen/vb2.png' width='40' height='32' align='bottom' />	";
-					 $this->m_utiles->mail_usuario_adjudicacion(19);
+					 $this->m_utiles->mail_usuario_adjudicacion($id_socio_adj);
 				 }else{
 					 echo "Ocurrió un error y la información no se grabó correctamente.";
 				 }

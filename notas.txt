@@ -62,3 +62,45 @@ Codigo para PM
 		
 	}
 	
+	
+	
+	
+	INSERT INTO `portalminero`.`seguimiento`
+            (
+             `id_proyecto`,
+             `id_pagina_conf`,
+             `grupo`,
+             `username`,
+             `fecha`)
+SELECT
+  ( SELECT id_pro FROM portalminero.proyectos WHERE id_pagina_pro = confluence.NOTIFICATIONS.PAGEID)  AS proyecto_id,
+  `PAGEID`,
+  'proyectos',
+  `USERNAME`,
+  `CREATIONDATE`
+  
+FROM `confluence`.`NOTIFICATIONS`
+
+SELECT * FROM `portalminero`.`seguimiento`
+
+DELETE FROM `portalminero`.`seguimiento` WHERE id_proyecto  IS NULL;
+
+
+        
+        
+        
+        
+SELECT
+  ( SELECT id_pro FROM portalminero.proyectos WHERE id_pagina_pro = confluence.NOTIFICATIONS.PAGEID)  AS proyecto_id,
+  `PAGEID`,
+  `SPACEID`,
+  `USERNAME`,
+  `CREATOR`,
+  `CREATIONDATE`,
+  `LASTMODIFIER`,
+  `LASTMODDATE`,
+  `DIGEST`,
+  `NETWORK`,
+  `CONTENTTYPE`,
+  
+FROM `confluence`.`NOTIFICATIONS`

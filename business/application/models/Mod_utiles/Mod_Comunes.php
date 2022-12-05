@@ -10,8 +10,9 @@ class Mod_Comunes extends CI_Model{
 			 
 				$config['protocol'] = 'sendmail';
 				$config['mailpath'] = '/usr/sbin/sendmail';
-				$config['charset'] = 'iso-8859-1';
+				$config['charset'] = 'utf-8';
 				$config['wordwrap'] = TRUE;
+				$config['mailtype'] = 'html';
 
 			    $this->email->initialize($config);
 
@@ -27,8 +28,6 @@ class Mod_Comunes extends CI_Model{
 				}
 
 	} 
-		
-	
 
 
 function sesionOk(){
@@ -51,7 +50,7 @@ function sesionOk(){
 				<h3 align='center'><a href='".URL_PM_BASE."wp/app/business/'>Su sesión ha finalizado por favor vuelva a conectarse al sistema.</a></h3></p>
 				<p>&nbsp;</p>
 				</body>
-				</html>";
+				</html><br><br><br><br><br><br><br><br><br><br><br>";
 				die();
 	}
 		
@@ -199,16 +198,9 @@ public function actividad_usuario($texto=0,$id_registro=0,$Tipo=0,$SES_id_user_s
 			$nombre_adj             = $row['nombre_adj'];
 		}
 		/*-------------------------------------------------------------------------------------------------------------------------------*/
-		$body="<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-		<html xmlns='http://www.w3.org/1999/xhtml'>
-		<head>
-		<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-		<title>Portal Minero</title>
-		</head>
-
-		<body>
+		$body="<body>
 		<div align='center'>
-		  <table width='40%' border='0'>
+		  <table width='1000%' border='0'>
 			<tr>
 			  <br><br><td><div align='center'><strong>ADJUDUCACION USUARIO </strong></div><br><br><br></td>
 			</tr>
@@ -230,13 +222,11 @@ public function actividad_usuario($texto=0,$id_registro=0,$Tipo=0,$SES_id_user_s
 			
 		  </table>
 <br><br><br><br><p>* <em>Este correo ha sido generado en forma automática  por el sistema</em></p>
-		</div>
-		</body>
-		</html>";
-		echo $body;
+		</div>";
+		//echo $body;
 		
 		 $this->enviar_correo("epinto@portalminero.com","Enrique Pinto","enriquepintofuentes@gmail.com",$body,"ADJUDICACION SOCIO PORTAL");
-		exit;
+		return true;
 		/*------------------------------------------------------------------------------------------------------------------------*/
 		
 	}
