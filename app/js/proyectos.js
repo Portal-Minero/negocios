@@ -384,8 +384,37 @@ function Order_By(opcion,viene){
 	  
   }
 
-function seguir_proyecto(pro){
-	alert('En Desarrollo pendiente');
+
+function seguir_proyecto(id_proyecto,accion){
+
+	var seguimi='seguimi_'+ id_proyecto;
+	
+	
+	/*-------------------------------------------------------*/
+					
+										$.ajax
+										  ({
+										   url: HttpUrl+'buscador/seguimiento_actulizar/',
+										   data : { id_proyecto : id_proyecto ,accion : accion},
+										   type : 'post',
+										   cache: false,
+										   
+										   success: function(r3)
+										   {
+											
+
+                                            document.getElementById(seguimi).innerHTML =r3;
+											
+											
+											let text = document.getElementById(seguimi).innerHTML; 
+                                            document.getElementById(seguimi).innerHTML = text.replace("&lt;", "<");
+											document.getElementById(seguimi).innerHTML = text.replace("&gt;", ">");
+
+										   }
+										  
+										});
+			/*-------------------------------------------------------*/
+			
 	
 }
 

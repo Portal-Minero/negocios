@@ -239,6 +239,52 @@ function carga_proyectos_nombre($sector,$inicio,$fin,$nombre=0,$orden=0,$desc__a
 	  
   }
 
+
+
+ function revisa_seguiminto($id_proyecto){
+	  $username=$this->session->userdata('SES_username_socio');
+	  $respuesta=0;
+	  
+		
+	  $sql="SELECT id_seguimiento FROM seguimiento WHERE id_proyecto=".$id_proyecto." AND username = '".$username."'";
+	  $query = $this->db->query($sql);
+	   
+	    foreach ($query->result() as $row)
+	    {
+	         
+	         $respuesta = $row->id_seguimiento;	            
+	    }
+	    $query->free_result();
+	    	  
+	    return($respuesta);
+	  
+  }
+
+     function actualiza_seguimiento($id_proyecto,$accion){
+		 $username=$this->session->userdata('SES_username_socio');
+		 $grupo="proyectos";
+		 date_default_timezone_set("America/Santiago");
+	     $html_date = date('Y/m/d H:i:s');
+	     $respuesta="0";
+		 
+		 if($accion==0){
+			 
+			     $data = array('id_proyecto'=>$id_proyecto,'id_pagina_conf'=>0,'grupo'=>$grupo,'username'=>$username,'fecha'=>$html_date);
+				
+				 $this->db->insert('seguimiento',$data);
+				 $this->db->close();
+				 $respuesta="1";
+		 }else{
+			 
+			 $this->db->where('id_proyecto', $id_proyecto , 'username', $username);
+             $this->db->delete('seguimiento');
+			 $respuesta="0";
+		}	
+         return($respuesta);		
+			 
+     }
+ 
+ 
 	function crea_html_inicial($arreglo,$inicio,$fin,$total_query,$sector){
 		$this->load->helper('url');
         $pagina_pro = base_url()."Fichaproyecto/ficha_proyectos/";
@@ -250,12 +296,25 @@ function carga_proyectos_nombre($sector,$inicio,$fin,$nombre=0,$orden=0,$desc__a
 		foreach ($arreglo as $row){
 			
 			
+			        $imagen_s ="";
+					$acc_s    ="";
+						
+			        if( $this->revisa_seguiminto($row['id_pro'])  > 0 ){
+						$imagen_s = URL_PM_APP."imagen/dejardeobservar.png";
+						$acc_s    ="1";
+						$texto_s = "Cerrar";
+					}else{
+						$imagen_s = URL_PM_APP."imagen/observar.png";
+						$acc_s    ="0";
+						$texto_s = "Agregar";
+					}
+					
 			        $popup="&nbsp; <a rel='shadowbox;width=1100;' data-toggle='modal' data-target='#exampleModalLong' href='#' onclick='popupproyecto(".$row['id_pro'].",$sector);' style='font-size:10px;color:#999;display:inline-block'>(Ver En Pop-Up)</a>";
 					
 			        $encriptada = $pagina_pro.$row['id_pro']."/".$sector."/0/";
 					
-			        $timestamp = strtotime($row['Fecha_actualizacion_pro']); 
-                    $newDate = date("m-d-Y", $timestamp );
+			        $timestamp  = strtotime($row['Fecha_actualizacion_pro']); 
+                    $newDate    = date("m-d-Y", $timestamp );
 					
 			        $respuesta =$respuesta."<tr>";
 				    $respuesta =$respuesta."<td><a href='".$encriptada."' >".$row['tNombre_pro']."</a>".$popup."</td>"; 
@@ -263,7 +322,7 @@ function carga_proyectos_nombre($sector,$inicio,$fin,$nombre=0,$orden=0,$desc__a
 					$respuesta =$respuesta."<td>".$row['Nombre_region']."</td>";
 					$respuesta =$respuesta."<td  align='right'>".number_format($row['Inversion_pro'], 0, ",", ".")."</td>";
 					$respuesta =$respuesta."<td>".$newDate."</td>";
-					$respuesta =$respuesta."<td><span style='font-size:10px;color:#999; text-decoration:none'><a href='#' onclick='seguir_proyecto(".$row['id_pro'].");'><img src='../../../app/imagen/observar.png'></a>Agregar</span></td>";
+					$respuesta =$respuesta."<td><span id='seguimi_".$row['id_pro']."' style='font-size:10px;color:#999; text-decoration:none'><a href='#' onclick='seguir_proyecto(".$row['id_pro'].",".$acc_s.");'><img src='".$imagen_s."'></a>".$texto_s."</span></td>";
 					$respuesta = $respuesta."</tr>";
 				   
 		}

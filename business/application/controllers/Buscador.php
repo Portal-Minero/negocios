@@ -117,6 +117,43 @@ function __construct()
 			
 			
 			
+			function seguimiento_actulizar(){
+				
+				 $respuesta   = "";
+				 $accion      = "0";
+				 $id_proyecto = "0";
+				 
+				 
+				 if (!empty($_REQUEST['id_proyecto'])) {
+					 $id_proyecto  = $_REQUEST['id_proyecto'];
+				 }
+				  
+				 
+				 if (!empty($_REQUEST['accion'])) {
+					 $accion = $_REQUEST['accion'];
+				 }
+				 
+			
+				$rc           = $this->m_buscador->actualiza_seguimiento($id_proyecto,$accion); 
+				
+				//echo $rc;
+				//exit;
+				if($rc == 0){
+					$imagen_s = URL_PM_APP."imagen/observar.png";
+					$respuesta='<a href="#" onclick="seguir_proyecto('.$id_proyecto.',0);"><img src="'.$imagen_s.'"></a>Agregar';
+				}	
+				
+				if($rc == 1){
+					$imagen_s = URL_PM_APP."imagen/dejardeobservar.png";
+					$respuesta='<a href="#" onclick="seguir_proyecto('.$id_proyecto.',1);"><img src="'.$imagen_s.'"></a>Cerrar';
+				}	
+				
+				
+				
+				
+				echo $respuesta;
+			}
+			
 			function busca_por_nombre($sector=0,$inicio=0,$fin=0,$nombre="",$orden=0,$desc__acen=0){
 			
 					
