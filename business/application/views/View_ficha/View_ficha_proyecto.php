@@ -60,6 +60,7 @@ $categories_sector =$categories_sector. "]";
 
 /* ---------- Fin programacion graficos ------*/ 
 
+$cad = count($datos_adjuntos);
 
 ?>
 
@@ -233,7 +234,9 @@ var printContents = document.getElementById('accordion').innerHTML;
 <div  id="contenedor_menu_lateral" style="background: none;border: 0px">
 	       
 		   <button type="button" id="mostrar_pesta" class="btn btn-primary btn-sm"  align="left" onclick="mostrat_todo()">Mostar Todo</button>
-		   <button type="button" class="btn btn-primary btn-sm"  align="right">Adjuntos (0)</button>
+		   <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#AdjuntosModalCenter">
+  Adjuntos (<?=$cad;?>)
+</button>
 		   <button type="button" class="btn btn-primary btn-sm"  align="right"  onclick="imprim1();">Imprimir</button>
 	  </div>
 	  <br><br>
@@ -931,6 +934,30 @@ var printContents = document.getElementById('accordion').innerHTML;
 <!-- Button trigger modal -->
 
 
+<!-- Modal -->
+<div class="modal fade" id="AdjuntosModalCenter" tabindex="-1" role="dialog" aria-labelledby="AdjuntosModalCenter" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Archivos Adjuntos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <ul>
+		<? foreach($datos_adjuntos as $rowad){ ?>
+		   <li><a href="#" target="_blank"><?=$rowad['TITLE'];?>&nbsp;&nbsp;&nbsp;<i class="fa-sharp fa-solid fa-download"></i></a></li>
+		 <?  } ?>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        
+        <button type="button" class="btn btn-primary"  data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <script>
   function enviar_cambios(){
@@ -938,7 +965,7 @@ var printContents = document.getElementById('accordion').innerHTML;
   }
 </script>  
 
-
+Novak Djokovic
 <?php
 
 

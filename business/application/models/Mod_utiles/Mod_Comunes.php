@@ -138,7 +138,17 @@ public function actividad_usuario($texto=0,$id_registro=0,$Tipo=0,$SES_id_user_s
 
    function mostrar_actividad_usuario(){
 	              $id_usuario = $this->session->userdata('SES_id_user_socio');
-		          $sql        = "SELECT * FROM actividad_usuario WHERE id_usuario = ".$id_usuario." ORDER BY id DESC LIMIT 0, 20;";
+		          //$sql        = "SELECT * FROM actividad_usuario WHERE id_usuario = ".$id_usuario." ORDER BY id DESC LIMIT 0, 20;";
+				  
+				  $sql ="SELECT
+						id_registro
+						, texto
+					FROM
+						portalminero.actividad_usuario
+					WHERE (id_usuario = ".$id_usuario.")
+					GROUP BY id_registro, texto
+					ORDER BY id DESC;";
+					
 				  $query      = $this->db->query($sql);
 				  $arreglo    = $query->result_array();
 				  return ($arreglo);

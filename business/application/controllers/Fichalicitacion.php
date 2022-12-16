@@ -1,18 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Directorio extends CI_Controller {
+class Fichalicitacion extends CI_Controller {
 function __construct()
 			{
 				parent::__construct();
                 
-			/*	$this ->load->model ('Mod_muro/Mod_muro_general','muro');
-				$this ->load->model ('Mod_general/Mod_general','general');
-				$this ->load->model ('Mod_buscador/Mod_buscador','buscador');
-				*/
-				
-				
-				$this->load->model ('Mod_directorio/Mod_directorio','proveedores');
+			
+				$this->load->model ('Mod_utiles/Mod_Comunes','m_utiles');
+				$this->load->model ('Mod_licitacion/Mod_licitacion','m_licitacion');
+				$this ->load->model ('Mod_proyecto/Mod_general/Mod_general','general');
 			}
 			
 			public function index()
@@ -22,76 +19,31 @@ function __construct()
 			}
 			
 			
-			
-			public function informacion_directorio(){
-				$SES_username_socio            =  $this->session->userdata('SES_username_socio');
-				$datos['sectores']             =  $this->session->userdata('SES_sectores');
-				$datos['datos_general']        =  $this->proveedores->ver_directorio($SES_username_socio);
-				//print_r($datos);
-				$this->load->view('View_directorio/view_informacion_directorio',$datos);
+			function prueba(){
 				
-			}	
-			
-			public function informacion_directorio_update(){
+			    $this->m_licitacion->linea_id_consultas($id_pais="",$id_region="",$id_lici_tipo=0,$id_sector=0);
+				$this->m_licitacion->carga_licitaciones_inicial();
+				 echo $GLOBALS['numero_de_lineas_global'];
+			}
+			function licitaciones($tipo=0){
 				
-				$SES_username_socio           = $this->session->userdata('SES_username_socio');
-		 		$datos['sectores']            =  $this->session->userdata('SES_sectores');
-				$datos['datos_general']       = $this->proveedores->ver_directorio($SES_username_socio);
+				$this->m_utiles->sesionOk();
+				$orden=0;
+				$tipo_orden ="desc";
+				$inicio     = 0;
+				$fin        = 50;
+				$datos['id_sectores']          = 1; // ojo
+				
+				$sectores                  = $this->session->userdata('SES_sectores');
+				$datos['paises']           = $this->m_licitacion->get_u_pais_general($tipo);
+				$datos['sectores']         = $sectores;
+				$datos['grilla_db']        = $this->m_licitacion->crea_grilla_db($orden,$tipo_orden,$tipo,$sectores,$inicio,$fin);
+				$datos['get_sectores']     = $this->m_licitacion->get_sectores();
+				
 				//print_r($datos);
-				$this->load->view('View_directorio/view_informacion_directorio_update.php',$datos);
+				$this->load->view('View_licitacion/View_buscador_licitacion',$datos);
 				
 			}
-			
-			
-			public function informacion_directorio_grabar(){
-				
-				//echo "grabar";
-				$datos['data']   = $this->proveedores->graba_directorio();
-				return $datos['data'] ;
-			}
-			
-			
-			function sube_imagen(){
-				
-				$phtml=URL_PM_BASE."images_dp";
-				
-				
-				//echo "kkkkk";
-				
-				
-				// Definitions
-							$accept_types = array(
-								"image/pjpeg",
-								"image/jpeg",
-								"image/png",
-								"image/gif",
-							);
-
-							$to_path = URL_PM_HOST_LINUX_HTML."images_dp";
-
-							// Check directory
-							if(!is_dir($to_path)){
-								echo "[ERROR]Internal directory not exists";
-								return;
-							}
-
-							// Check file type
-							if(!in_array($_FILES["file"]["type"], $accept_types)){
-								echo "[ERROR]Error en tipo Archivo";
-								return;
-							}
-
-
-							// Move the file
-							if (move_uploaded_file($_FILES["file"]["tmp_name"], $to_path . "/" . $_FILES['file']['name'])) {
-								echo $_FILES['file']['name'];
-								return;
-							}
-
-							// Default error
-							echo "[ERROR]Move image failed!";
-											
-									  }
           
 } // fin
 

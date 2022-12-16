@@ -56,7 +56,7 @@
 	<h5><b>Licitaciones</b></h5>
       <ul>
 		  
-		  <li>Ver Todas</li>
+		  <li><a href="<?=URL_PM_APP_NEG;?>Fichalicitacion/licitaciones/0/">Ver Todas</a></li>
 		  <li>Licitaciones Estimadas</li>
 		  <li>Licitaciones Definidas</li>
 		  <li>Licitaciones En Proceso de Adjudicación</li>

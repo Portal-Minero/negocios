@@ -29,6 +29,28 @@ class Mod_FichaProyecto extends CI_Model{
 				 
 	}
 	
+	
+	
+	function get_adjuntos_proyecto($pro=0){
+		
+		
+		
+		 $sql = "SELECT
+				ATTACHMENTS.TITLE
+				, proyectos.id_pro
+			FROM
+				portalminero.proyectos
+				INNER JOIN portalminero.ATTACHMENTS 
+					ON (proyectos.id_pagina_pro = ATTACHMENTS.PAGEID)
+			WHERE (proyectos.id_pro =".$pro.");";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
 	function get_adjudicaciones_asociadas($pro=0){
 		
 		

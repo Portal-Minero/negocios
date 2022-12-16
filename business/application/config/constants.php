@@ -96,6 +96,11 @@ define('URL_PM_HOST_LINUX','/var/www/html/wp/app/');
 define('URL_PM_HOST_LINUX_HTML','/var/www/html/');
 
 
+define('DB_REGISTRO_INICIO','0');
+define('DB_REGISTRO_FINAL','50');
+
+
+
 
 
 

@@ -39,7 +39,7 @@ function __construct()
 				 $datos['id_pro']                   = $id_pro;
 				 $datos['datos_general']            = $this->m_Mod_FichaProyecto->editar_proyecto($id_pro);
 				 
-				 
+				 $datos['datos_adjuntos']           = $this->m_Mod_FichaProyecto->get_adjuntos_proyecto($id_pro);
 				 $datos['get_etapas_proyecto']      = $this->m_Mod_FichaProyecto->get_etapas_proyecto($id_pro);
 				 $datos['get_hitos_importantes']    = $this->m_Mod_FichaProyecto->get_hitos_importantes($id_pro);
 				 

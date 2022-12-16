@@ -53,9 +53,8 @@ $item_meu_proyecto=$item_meu_proyecto."<li> <a href='#' onclick='seleccion_menu_
     </ul>
 	 <hr>
 	<h5><b>Licitaciones</b></h5>
-      <ul>
-		 
-		  <li>Ver Todas</li>
+      <ul>		 
+		  <li><a href="<?=URL_PM_APP_NEG;?>Fichalicitacion/licitaciones/1/">Ver Todas</a></li>
 		  <li>Licitaciones Estimadas</li>
 		  <li>Licitaciones Definidas</li>
 		  <li>Licitaciones En Proceso de Adjudicación</li>

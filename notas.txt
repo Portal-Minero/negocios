@@ -104,3 +104,6 @@ SELECT
   `CONTENTTYPE`,
   
 FROM `confluence`.`NOTIFICATIONS`
+
+
+SELECT linea_id_consultas FROM user_socio WHERE id_user_socio = ".$this->session->userdata('SES_id_user_socio');
