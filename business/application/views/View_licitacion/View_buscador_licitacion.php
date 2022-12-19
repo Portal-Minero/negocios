@@ -203,8 +203,9 @@ function ShowSelected(){
 		<div><br>
 		<p><b>País :</b></p>
 		  <select name="select_get_u_pais" id="select_get_u_pais" style="width: 150px; " onchange="ShowSelected();">
+		  <option value="81">Chile</option>
 		 <option value="0">Todos</option>
-		 <option value="81">Chile</option>
+		 
 			
 			           <?
                              foreach ($paises as $row){
@@ -221,8 +222,8 @@ function ShowSelected(){
 		 <option value="0">Todos</option>
 		 
 			           <?
-                           //  foreach ($get_u_region as $row){
-					      //   echo "<option value='".$row['id_region']."'>".$row['tNombre_region']."</option>"; }
+                             foreach ($get_u_region as $row){
+					         echo "<option value='".$row['id_region']."'>".$row['tNombre_region']."</option>"; }
                         ?>
 			
 		</select>

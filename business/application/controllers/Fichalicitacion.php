@@ -37,8 +37,11 @@ function __construct()
 				$sectores                  = $this->session->userdata('SES_sectores');
 				$datos['paises']           = $this->m_licitacion->get_u_pais_general($tipo);
 				$datos['sectores']         = $sectores;
-				$datos['grilla_db']        = $this->m_licitacion->crea_grilla_db($orden,$tipo_orden,$tipo,$sectores,$inicio,$fin);
+				//$datos['grilla_db']        = $this->m_licitacion->crea_grilla_db($orden,$tipo_orden,$tipo,$sectores,$inicio,$fin);
 				$datos['get_sectores']     = $this->m_licitacion->get_sectores();
+				$datos['get_u_region']     = $this->m_licitacion->get_u_region();
+				
+				
 				
 				//print_r($datos);
 				$this->load->view('View_licitacion/View_buscador_licitacion',$datos);

@@ -124,7 +124,27 @@ class Mod_licitacion extends CI_Model{
 				 
 	}
 	
-	
+	function get_u_region($pais=81){
+		
+		
+		
+		 $sql = "SELECT
+				  id_region,
+				  id_pais,
+				  TRIM(Nombre_region) as tNombre_region ,
+				  X,
+				  Y,
+				  exacto,
+				  orden,
+				  nombre_corto
+				FROM portalminero.u_region
+				WHERE id_pais = ".$pais." ORDER BY orden";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
 	
 	function get_sectores($id_sector=0){
 		
