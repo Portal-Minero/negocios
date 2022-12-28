@@ -118,7 +118,7 @@
 	
 	<div  style="background-color: #066293;"><h5 style="color:white;">Recientemente Actualizado</h5></div>
       <div>
-		  <img src="../../app/imagen/portal-06.png"  width="28" height="28" />&nbsp;&nbsp;<b>Área de Proyectos</b>
+		  <img src="<?=URL_PM_APP;?>imagen/portal-06.png"  width="28" height="28" />&nbsp;&nbsp;<b>Área de Proyectos</b>
 		  <ul>
 			  <?
                 foreach ($recientemente_actualizado_proyectos as $row)
@@ -135,7 +135,7 @@
 	  </div>
 	  <hr>
 	  <div>
-		  <img src="../../app/imagen/portal-08.png"  width="28" height="28" />&nbsp;&nbsp;<b>Área de Licitaciones</b>
+		  <img src="<?=URL_PM_APP;?>imagen/portal-08.png"  width="28" height="28" />&nbsp;&nbsp;<b>Área de Licitaciones</b>
 		  <ul>
 			  <?
                 foreach ($recientemente_actualizado_licitaciones as $row)

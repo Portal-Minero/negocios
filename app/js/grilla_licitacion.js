@@ -4,21 +4,19 @@ $(document).ready(
           function() {
 	         /*-------------------------------------------------------------------*/
 			    $(document).ready(function() {
+				//	alert(22);
 					
 					var sector                 = $("#id_sectores").val();
-					var sector_orden_elegido   = 0;
+					
 	 				
 					linea_id_proyectos_filtro="";
 					document.getElementById("text_busca_nombre").value="";
 					var linea_id_proyectos_filtro  = $("#linea_id_proyectos_filtro").val();
 					linea_id_proyectos_filtro="";
 					
-						 $.getJSON( HttpUrl+"buscador/busca_inicial/", { 
-						 "inicio"  : G_Pub_inicio, 
-						 "sector"  : sector, 
-						 "linea_id_proyectos_filtro"  : linea_id_proyectos_filtro, 
-						 "orden_elegido"  : sector_orden_elegido, 
-						 "fin"     : G_Pub_fin 
+						 $.getJSON( HttpUrl+"Fichalicitacion/carga_inicial_licitacion/", { 
+						 
+						 "sector"  : sector
 						 } )
 						.done(function( data, textStatus, jqXHR ) {
 						 

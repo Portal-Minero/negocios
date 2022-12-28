@@ -40,7 +40,7 @@ $DateAndTime   = $Object->format("Y-m-d h:i:s ");  */
 <body>
 <script src="<?=URL_PM_APP?>js/filtros.js"></script>
 <script src="<?=URL_PM_APP?>js/grilla_proyecto.js"></script>
-
+<script src="<?=URL_PM_APP?>js/proyectos.js"></script>
 
 <script>
 function popupproyecto(id_pro,sector){

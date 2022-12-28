@@ -9,7 +9,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="<?=URL_PM_APP?>css/comun.muro.css">
   <script src="<?=URL_PM_APP?>js/general.js"></script>
-  <script src="<?=URL_PM_APP?>js/proyectos.js"></script>
+  
   <script src="https://kit.fontawesome.com/8233cfb127.js" crossorigin="anonymous"></script>
      
    

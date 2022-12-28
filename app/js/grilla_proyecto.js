@@ -56,3 +56,79 @@ $(document).ready(
 				
 	 }
 );
+
+
+
+
+
+
+function retorna_sectores_selecionados(){
+
+var sector=0;
+		/*-------------------------------------------------------*/
+		
+							$.ajax
+							  ({
+							   url: HttpUrl+'muro/retorna_sectores_selecionados//',
+							   data : { sector : sector },
+							   type : 'post',
+							   cache: false,
+							   
+							   success: function(r3)
+							   {
+								 
+								$("#div_sectores_interes").html(r3);
+								$("#div_sectores_interes_msg").html('');
+							   }
+							  
+							});
+			/*-------------------------------------------------------*/
+	
+	
+	
+}	
+
+
+
+function graba_sectores_selecionados(){
+
+
+
+var sector_1   = $("#chec1").prop('checked');
+var sector_2   = $("#chec2").prop('checked');
+var sector_3   = $("#chec3").prop('checked');
+var sector_4   = $("#chec4").prop('checked');
+var sector_5   = $("#chec5").prop('checked');
+var sector_6   = $("#chec6").prop('checked');
+var sector_7   = $("#chec7").prop('checked');
+
+
+
+		/*-------------------------------------------------------*/
+		
+							$.ajax
+							  ({
+							   url: HttpUrl+'muro/graba_sectores_selecionados/',
+							   data : { sector_1 : sector_1, 
+							   sector_2 : sector_2, 
+							   sector_3 : sector_3, 
+							   sector_4 : sector_4, 
+							   sector_5 : sector_5, 
+							   sector_6 : sector_6, 
+							   sector_7 : sector_7
+							   },
+							   type : 'post',
+							   cache: false,
+							   
+							   success: function(r3)
+							   {
+								 
+								$("#div_sectores_interes_msg").html(r3);
+							   }
+							  
+							});
+			/*-------------------------------------------------------*/
+	
+	
+	
+}

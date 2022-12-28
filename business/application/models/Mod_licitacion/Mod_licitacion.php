@@ -86,7 +86,7 @@ class Mod_licitacion extends CI_Model{
 	   $linea_id_proyectos_filtro = $this->lee_linea_id_consultas();
 	   $total_query = 0;
 		 
-			 $sql = "SELECT id_lici,Nombre_lici_completo,Nombre_sector,Nombre_lici_tipo,Nombre_pais,Nombre_region FROM vista_buscador_licitacion WHERE id_lici IN (".$linea_id_proyectos_filtro.")";
+			 $sql = "SELECT id_lici,Nombre_lici_completo,Nombre_sector,Nombre_lici_tipo,Nombre_pais,Nombre_region FROM vista_buscador_licitacion WHERE id_lici IN (".$linea_id_proyectos_filtro.") LIMIT 0, 50";
 		 			 
 			
 		     	   
@@ -94,12 +94,50 @@ class Mod_licitacion extends CI_Model{
 			$arreglo        = $query->result_array();
 			$total_query    = $GLOBALS['numero_de_lineas_global'];
 			
-			return true;
-			$respuesta      = $this->crea_html_inicial($arreglo,DB_REGISTRO_INICIO,DB_REGISTRO_FINAL,$total_query,$sector=0);
-			echo $respuesta;
+			//return true;
+			$respuesta      = $this->crea_html_inicial($arreglo,$total_query);
+			//echo $respuesta;
 				  
 				 
 	}
+	
+	function crea_html_inicial($arreglo,$total_query){
+	    $respuesta="";
+		foreach ($arreglo as $row){
+			
+			 $respuesta =$respuesta."<tr>";
+			 $respuesta =$respuesta."<td><a href='#' onclick='trae_ficha_liciaciones(".$row['id_lici'].",1);'>".$row['Nombre_lici_completo']."</a>&nbsp; <a rel='shadowbox;width=1100;' data-toggle='modal' data-target='#exampleModalLong' href='#' onclick='popupproyecto(".$row['id_lici'].",1);' style='font-size:10px;color:#999;display:inline-block'>(Ver En Pop-Up)</a></td>";
+			 $respuesta =$respuesta."<td>".$row['Nombre_sector']."</td>";
+			 $respuesta =$respuesta."<td>".$row['Nombre_lici_tipo']."</td>";
+			 $respuesta =$respuesta."<td>".$row['Nombre_pais']."</td>";
+			 $respuesta =$respuesta."<td>".$row['Nombre_region']."</td>";
+			 $respuesta =$respuesta."</tr>";
+				
+		}
+		
+		$dice="**";
+		$total_query=100;
+		$paginador_query=$this->paginador_vista(  $GLOBALS['numero_de_lineas_global']  );
+		$arreglo_lineas=100;
+		
+		
+				    $dice = "Mostrando 1 - $arreglo_lineas de un total de $total_query resultados.";
+		            $tjson='[
+							{
+								"Jresultado": "'.$respuesta.'",
+								"Jpaginador": "'.$arreglo_lineas.'",
+								"Jinicio": "1",
+								"Jfin": "50",
+								"Jdice": "'.$dice.'",
+								"Jtotal_query": "'.$total_query.'",
+								"Jpaginador_query": "'.$paginador_query.'",
+								"Jestado": "OK"
+							}
+							]';
+		
+		echo $tjson;
+	}
+	
 	
 	
 	function get_u_pais_general($tipo=0){
@@ -112,7 +150,7 @@ class Mod_licitacion extends CI_Model{
 				FROM
 					portalminero.vista_buscador_licitacion
 				WHERE (id_sector IN (".$sectores.")
-					AND id_lici_tipo =".$tip_lici.")
+					AND id_lici_tipo =".$tipo.")
 				GROUP BY id_pais, Nombre_pais
 				ORDER BY Nombre_pais ASC;";
 			
@@ -145,6 +183,267 @@ class Mod_licitacion extends CI_Model{
 				  return ($arreglo);
 				 
 	}
+	
+	
+	function get_empresa_licita($sectores=0,$id_lici_tipo=0){
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+		
+		
+		 $sql = "SELECT
+				licitaciones.id_mandante
+				, TRIM(empresas.Razon_social_emp) AS Razon_social_empresa
+			FROM
+				portalminero.licitaciones
+				INNER JOIN portalminero.empresas 
+					ON (licitaciones.id_mandante = empresas.id_emp)
+			WHERE (licitaciones.id_sector IN (".$sectores.") ".$id_lici_tipo_db." )
+			GROUP BY empresas.Razon_social_emp
+			ORDER BY empresas.Razon_social_emp ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	function get_registro_proveedores($sectores=0,$id_lici_tipo=0){
+		
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+		
+		 $sql = "SELECT
+					registro_proveedores.id_registro
+					, registro_proveedores.Nombre_registro
+				FROM
+					portalminero.licitaciones_x_registro_proveedores
+					INNER JOIN portalminero.registro_proveedores 
+						ON (licitaciones_x_registro_proveedores.id_registro = registro_proveedores.id_registro)
+					INNER JOIN portalminero.licitaciones 
+						ON (licitaciones.id_lici = licitaciones_x_registro_proveedores.id_lici)
+				WHERE (licitaciones.id_sector IN (".$sectores.") ".$id_lici_tipo_db." )
+				GROUP BY registro_proveedores.Nombre_registro
+				ORDER BY registro_proveedores.Nombre_registro ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	function get_obras_principales($sectores=0,$id_lici_tipo=0){
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+		
+		
+		 $sql = "SELECT
+				obras_principales.id_obra
+				, obras_principales.Nombre_obra
+			FROM
+				portalminero.licitaciones
+				INNER JOIN portalminero.licitaciones_x_obras 
+					ON (licitaciones.id_lici = licitaciones_x_obras.id_lici)
+				INNER JOIN portalminero.obras_principales 
+					ON (licitaciones_x_obras.id_obra = obras_principales.id_obra)
+			WHERE (licitaciones.id_sector IN (".$sectores.") ".$id_lici_tipo_db .")
+			GROUP BY obras_principales.Nombre_obra
+			ORDER BY obras_principales.Nombre_obra ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	
+	function get_equipos_principales($sectores=0,$id_lici_tipo=0){
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+		
+		
+		 
+				
+				 $sql = "SELECT
+			equipos_principales.id_equipo
+			, equipos_principales.Nombre_equipo
+		FROM
+			portalminero.licitaciones_x_equipos
+			INNER JOIN portalminero.equipos_principales 
+				ON (licitaciones_x_equipos.id_equipo = equipos_principales.id_equipo)
+			INNER JOIN portalminero.licitaciones 
+				ON (licitaciones.id_lici = licitaciones_x_equipos.id_lici)
+		WHERE (licitaciones.id_sector  IN (".$sectores.") ".$id_lici_tipo_db.")
+		GROUP BY equipos_principales.Nombre_equipo
+		ORDER BY equipos_principales.Nombre_equipo ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	function get_proyectos_tipo($sectores=0){
+		
+		
+				
+				 $sql = "SELECT
+				proyectos_tipo.id_tipo
+				, proyectos_tipo.Nombre_tipo
+				
+			FROM
+				portalminero.proyectos_x_tipo
+				INNER JOIN portalminero.proyectos_tipo 
+					ON (proyectos_x_tipo.id_tipo = proyectos_tipo.id_tipo)
+				INNER JOIN portalminero.licitaciones 
+					ON (licitaciones.id_pro = proyectos_x_tipo.id_pro)
+			WHERE (licitaciones.id_sector IN (".$sectores.") )
+			GROUP BY proyectos_tipo.Nombre_tipo
+			ORDER BY proyectos_tipo.Nombre_tipo ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	function get_rubros_principales($sectores=0,$id_lici_tipo=0){
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+		
+				
+				 $sql = "SELECT
+						rubros.id_rubro
+						, rubros.Nombre_rubro
+					FROM
+						portalminero.licitaciones
+						INNER JOIN portalminero.licitaciones_x_rubros 
+							ON (licitaciones.id_lici = licitaciones_x_rubros.id_lici)
+						INNER JOIN portalminero.rubros 
+							ON (licitaciones_x_rubros.id_rubro = rubros.id_rubro)
+					WHERE (licitaciones.id_sector IN (".$sectores.") ".$id_lici_tipo_db.")
+					GROUP BY rubros.Nombre_rubro
+					ORDER BY rubros.Nombre_rubro ASC;
+					";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	
+	
+	function get_licitaciones_tipos($sectores=0,$id_lici_tipo=0){
+		
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+				
+				 $sql = "SELECT
+					licitaciones_tipos.id_lici_tipo
+					, licitaciones_tipos.Nombre_lici_tipo
+				FROM
+					portalminero.licitaciones
+					INNER JOIN portalminero.licitaciones_tipos 
+						ON (licitaciones.id_lici_tipo = licitaciones_tipos.id_lici_tipo)
+				WHERE (licitaciones.id_sector IN (".$sectores.") ".$id_lici_tipo_db.")
+				GROUP BY licitaciones_tipos.Nombre_lici_tipo
+				ORDER BY licitaciones_tipos.Nombre_lici_tipo ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	
+	function get_servicios_principales($sectores=0,$id_lici_tipo =0){
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+				
+				$sql = "SELECT
+					servicios_principales.id_serv
+					, servicios_principales.Nombre_serv
+				FROM
+					portalminero.licitaciones
+					INNER JOIN portalminero.licitaciones_x_servicios 
+						ON (licitaciones.id_lici = licitaciones_x_servicios.id_lic)
+					INNER JOIN portalminero.servicios_principales 
+						ON (licitaciones_x_servicios.id_serv = servicios_principales.id_serv)
+				WHERE (licitaciones.id_sector IN (".$sectores.") ".$id_lici_tipo_db.")
+				GROUP BY servicios_principales.Nombre_serv
+				ORDER BY servicios_principales.Nombre_serv ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	
+	
+		function get_suministros_principales($sectores=0,$id_lici_tipo=0){
+		$id_lici_tipo_db ="";
+		if($id_lici_tipo >0 ){ $id_lici_tipo_db = " AND licitaciones.id_lici_tipo =".$id_lici_tipo; }
+		
+				
+				 $sql = "SELECT
+					suministros_principales.id_sumin
+					, suministros_principales.Nombre_sumin
+				FROM
+					portalminero.licitaciones
+					INNER JOIN portalminero.licitaciones_x_suministros 
+						ON (licitaciones.id_lici = licitaciones_x_suministros.id_lici)
+					INNER JOIN portalminero.suministros_principales 
+						ON (licitaciones_x_suministros.id_sumin = suministros_principales.id_sumin)
+				WHERE (licitaciones.id_sector IN (".$sectores.") ".$id_lici_tipo_db.")
+				GROUP BY suministros_principales.Nombre_sumin
+				ORDER BY suministros_principales.Nombre_sumin ASC;";
+				  
+				  $query     = $this->db->query($sql);
+				  $arreglo   = $query->result_array();
+				  return ($arreglo);
+				 
+	}
+	
+	
+	
+	
+	function paginador_vista($total=0){
+		
+		$total =100;
+		$numero_de_cuadros = 0;
+		$numero_de_cuadros = round($total / 20 );
+		
+		
+		$li="";
+		
+
+		for($i=1;$i<=20;$i++){
+			$li=$li."<li class='page-item'  ><a  style='font-size: 9px;' class='page-link' href='#'>".$i."</a></li>";
+		}
+		
+		$pagi="";
+		$pagi=$pagi."<nav aria-label='...'>";
+		$pagi=$pagi."<ul class='pagination pagination-sm'>";
+		$pagi=$pagi.$li;
+		$pagi=$pagi."</ul>";
+		$pagi=$pagi."</nav>".$numero_de_cuadros;
+		return $pagi;
+
+    }
+	
+	
+	
+	
+
 	
 	function get_sectores($id_sector=0){
 		
