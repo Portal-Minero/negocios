@@ -7,9 +7,7 @@ var G_Pub_inicio   = 0;
 var G_Pub_fin      = 50; 
 /*-------------------------------------------*/
 
-
-
-
+Lamona100**
 /* se gatilla cuando se cambia selecion de menu 
    restablece valores generales y llama a funcion retorna_por_menu(sector)
 */
