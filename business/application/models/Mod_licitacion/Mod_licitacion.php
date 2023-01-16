@@ -15,7 +15,56 @@ class Mod_licitacion extends CI_Model{
 						
 	}
 	
+	function busqueda_licitaciones_superior(){
+		/*-------------------------------------------------*/
+	     /* se ejeuta filtro especial superiro */
+	     /*-------------------------------------------------*/
+		
+		global 	$numero_de_lineas_global;	
+		$numero_de_lineas_global=0;
+		$where=" where 1=1";
+		
+		if (!empty($_REQUEST['select_get_sector'])) {
+			 $select_get_sector = $_REQUEST['select_get_sector'];				
+	    }
+		if (!empty($_REQUEST['select_get_empresa_lici'])) {
+			  $select_get_empresa_lici = $_REQUEST['select_get_empresa_lici'];				
+	    }
+		if (!empty($_REQUEST['select_get_u_pais'])) {
+			 $select_get_u_pais = $_REQUEST['select_get_u_pais'];				
+	    }
+		if (!empty($_REQUEST['select_get_u_region'])) {
+			 $select_get_u_region = $_REQUEST['select_get_u_region'];				
+	    }
+		if (!empty($_REQUEST['select_get_reg_re'])) {
+			 $select_get_reg_re= $_REQUEST['select_get_reg_re'];				
+	    }
+		if (!empty($_REQUEST['get_licitaciones_tipos'])) {
+			 $get_licitaciones_tipos = $_REQUEST['get_licitaciones_tipos'];				
+	    }
+		if (!empty($_REQUEST['tipo_lici'])) {
+			 $tipo_lici = $_REQUEST['tipo_lici'];				
+	    }
+		
+	   //----------------------------------------------------
+	
+	    if($select_get_sector > 0 ){ 
+	       $where = $where." and  ( id_sector = ".$select_get_sector.")";
+	    }
+	    
+		
+		 if($select_get_empresa_lici > 0 ){ 
+	       $where = $where." and  ( id_mandante = ".$select_get_empresa_lici.")";
+	    }
+	}
+	
+	
+	
 	function linea_id_consultas($id_pais="",$id_region="",$id_lici_tipo="",$id_sector=""){
+		/*-------------------------------------------------*/
+	     /* se ejeuta al abir la vntana sin filtro especial */
+	     /*-------------------------------------------------*/
+		
 		global 	$numero_de_lineas_global;	
 		$numero_de_lineas_global=0;
 		$where=" where 1=1";
@@ -140,7 +189,7 @@ class Mod_licitacion extends CI_Model{
 	
 	
 	
-	function get_u_pais_general($tipo=0){
+	function get_u_pais_tipo_sector($tipo=0){
 		$tip_lici="";
 		$sectores  = $this->session->userdata('SES_sectores');
 		if($tipo==0){ $tip_lici="0 or 1=1 ";}
